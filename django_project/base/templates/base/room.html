@@ -1,0 +1,86 @@
+<!--In this template, the name of the video chat is displayed, along
+    with first and second button turning the microphone, and camera, 
+    on and off, and a third button for leaving the chat.-->
+
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+    <style>
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            width: 1366px;
+            height: 46px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+
+        .navbar a {
+            font-size: 16px;
+            color: white;
+            position: absolute;
+            left: 0px;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a.two {
+            font-size: 16px;
+            color: white;
+            position: absolute;
+            left: 120px;
+            text-decoration: none;
+        }
+
+        .navbar a.three {
+            font-size: 16px;
+            color: white;
+            position: absolute;
+            left: 240px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover,
+        .dropdown:hover .dropbtn {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<main>
+    <div class="navbar">
+        <a href="/">Home Page</a>
+        <a class="two" href="{% url 'view-menu' %}">View Menu</a>
+        <a class="three" href="{% url 'lobby' %}">Join Another Room</a>
+    </div>
+
+    <section id="room-name-wrapper">
+        <p>Room Name: <span id="room-name"></span></p>
+    </section>
+
+    <!--This HTML template is responsible for displaying the video player of each user.-->
+    <section id="video-streams"></section>
+
+    <section id="controls-wrapper">
+        <div class="icon-wrapper">
+            <img class="control-icon" id="mic-btn" src="{% static 'images/mic-chat.png' %}" />
+        </div>
+
+        <div class="icon-wrapper">
+            <img class="control-icon" id="camera-btn" src="{% static 'images/video-chat.png' %}" />
+        </div>
+
+        <div class="icon-wrapper">
+            <img class="control-icon" id="leave-btn" src="{% static 'images/leave-chat.png' %}" />
+        </div>
+    </section>
+</main>
+
+<script type="text/javascript" src="{% static 'assets/AgoraRTC_N-4.12.2.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/streams.js' %}"></script>
+{% endblock content %}
+
+<!--23-->

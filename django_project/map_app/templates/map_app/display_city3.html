@@ -1,0 +1,60 @@
+{% load static %}
+{% load embed_video_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'styles/city.css' %}" type="text/css"/>
+</head>
+<body>
+    <div class="container">
+        <img src="{% static '/images/istanbul-bosphorus.jpg' %}" alt="Istanbul Bosphorus"/>
+
+        <div class="content">
+            <br><br>
+            <h1 style="font-size: 2em; color: powderblue">İstanbul</h1>
+            <br>
+            <u><b>City Attractions</b></u>
+            <li><a href="{% url 'topkapi-palace' %}">Topkapı Palace</a></li>
+            <li><a href="{% url 'sultanahmet-mosque' %}">Sultanahmet Mosque</a></li>
+            <li><a href="{% url 'grand-bazaar' %}">Grand Bazaar</a></li><br><br>
+
+            <b><a class="videos"
+                href="{% url 'istanbul-videos' %}">Travel Videos</a></b><br><br>
+
+            <b><a class="videos" href="{% url 'istanbul-history' %}">History of İstanbul</a></b>
+
+            <br><br>
+            <u><b>Hotel Cost</b></u>
+            <li>Five Star Average: $100 per night</li>
+            <li>Three Star Average: $59 per night</li>
+
+            <li><a href="https://www.booking.com/fivestars/city/tr/istanbul.html"
+                target="_blank">5-Star Hotels in İstanbul</a></li>
+            <li><a href="https://www.tripadvisor.com/Hotels-g293974-zfc3-Istanbul-Hotels.html"
+                target="_blank">3-Star Hotels in İstanbul</a></li>
+            <br>
+            <u><b>Average Daily Dining Cost</b></u>
+            <li>Per Person: $12</li><br>
+            <li>Tip Percentage: 5-10%</li><br>
+
+            <u><b>Average Daily Expenditure</b></u>
+            <li>Per Person: $46</li>
+
+            <br><b><a class="videos"
+                href="{% url 'istanbul-english-and-transportation' %}">
+                English Proficiency & Transportation</a></b><br>
+
+            <br><b><a class="videos" href="{% url 'istanbul-details' %}">
+                Important Details</a></b><br>
+
+            <br><u><b>Hottest Month</b></u>
+            <li>August (Average High: 83°F)</li>
+
+            <br><u><b>Coldest Month</b></u>
+            <li>February (Average Low: 39°F)</li>
+        </div>
+    </div>
+</body>
+</html>
+
+<!--49-->

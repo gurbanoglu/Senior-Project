@@ -1,0 +1,44 @@
+/*This CSS file dictates the styling for the buttons being
+  displayed on the "FacialLoginResult.html" template.*/
+
+.button {
+    border: 3.8px solid orangered;
+    background-color: orangered;
+    color: white;
+    padding: 20px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 30px;
+}
+
+.button2 {
+    /*Amber*/
+    background-color: #FFBF00;
+    color: black;
+    border: 3.8px solid #FFBF00;
+}
+
+.button3 {
+    background-color: aquamarine;
+    color: white;
+    border: 3.8px solid aquamarine;
+}
+
+.button:hover {
+    background-color: lightgray;
+    color: black;
+}
+
+.button2:hover {
+    background-color: black;
+    color: white;
+}
+
+.button3:hover {
+    background-color: white;
+    color: black;
+}

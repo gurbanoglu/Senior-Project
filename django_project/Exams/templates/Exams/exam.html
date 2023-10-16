@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!--This HTML template is responsible for displaying the name of the exam,
+    the score required to pass, the time remaining, and a button that gives
+    the user the option to return to the previous page.
+
+    This is displayed at the top of the web page above all of the exam questions.-->
+
+{% block scripts %}
+<script src="{% static 'Exams/exam.js' %}" defer></script>
+{% endblock scripts %}
+
+{% block title %}
+{{ obj.m_examName }}
+{% endblock title %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col">
+        <b style="position: absolute; font-size: 2em; top: 20px;">
+            {{ obj.m_examName }}: {{ obj.m_material }}</b>
+
+        <b b style="position: absolute; font-size: 1.2em; top: 80px;"">
+            Score required to pass: {{ obj.m_scoreRequiredToPass }}%</b>
+    </div>
+    <b style=" position: absolute; font-size: 1.5em; right: 200px; top: 39px;">Time Remaining: </b>
+        <div class="col text-right" style="top: 24px; font-size: 1.5em;" id="timer-box"></div>
+        <div class="col text-right" style="top: 24px; font-size: 1.5em;" id="zero-timer-box"></div>
+    </div>
+    <br><br><br><br>
+    <a href="{% url 'Exams:view-exams' %}" class="btn btn-danger">Go Back</a>
+
+    <form id="exam-form" class="mt-3 mb-3">
+        {% csrf_token %}
+        <div id="exam-box"></div>
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    </form>
+    <br><br>
+    <div id="score-box"></div>
+    <div id="result-box"></div>
+
+    {% endblock content %}
+
+    <!--27-->

@@ -1,0 +1,192 @@
+/*This CSS file handles the styling for the form where the user enters the
+  name of the video meeting room they would like to join along with their
+  their username.
+  
+  The perimeter holding the visual captured by the camera is styled in 
+  accordance to the CSS in this file.*/
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap');
+
+:root {
+    --shaddow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+body {
+    background-color: rgba(220, 34, 260, 1);
+    font-family: 'Roboto', sans-serif;
+}
+
+/*For Joining A Room*/
+#form-container {
+    width: 600px;
+    box-shadow:
+        var(--shaddow);
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    position: fixed;
+    top: 335px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/*Lobby Page*/
+#logo {
+    display: block;
+    width: 100px;
+    margin: 0 auto;
+}
+
+#welcome-message {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#welcome-message h1 {
+    font-size: 36px;
+}
+
+#welcome-message p {
+    font-size: 16px;
+    color: rgb(97, 98, 105);
+    font-weight: 300;
+}
+
+.form-field {
+    margin-bottom: 20px;
+}
+
+.form-field label {
+    font-size: 16px;
+    line-height: 1.7em;
+}
+
+.form-field input {
+    /*When the width is assigned 100%, it means that the field will
+      occupy the entire container.*/
+    width: 100%;
+    border: 2px solid rgba(198, 202, 219, 1);
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/*Since the button is an input field, the type must be set to 'submit'.*/
+.form-field input[type='submit'] {
+    background-color: rgb(75, 93, 172);
+    /*This button will not have a button.*/
+    border: none;
+    /*The text of the button will be white.*/
+    color: #fff;
+}
+
+
+@media screen and (max-width: 450px) {
+    #form-container {
+        width: 95%;
+    }
+
+    #welcome-message h1 {
+        font-size: 24px;
+    }
+}
+
+/*Positioning the name of the meeting room.*/
+#room-name-wrapper {
+    text-align: center;
+    font-size: 18px;
+}
+
+#video-streams {
+    display: flex;
+    flex-wrap: wrap;
+    height: 90vh;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.video-container {
+    flex-basis: 500px;
+    flex-grow: 1;
+    max-height: 100%;
+    min-height: 350px;
+    border: 1px solid rgb(115, 121, 163);
+    border-radius: 5px;
+    /*Specify the space between each video.*/
+    margin: 4px;
+    background-color: rgb(152, 181, 216);
+    position: relative;
+}
+
+.video-player {
+    height: 100%;
+    width: 100%;
+}
+
+.video-player>* {
+    border-radius: 5px;
+}
+
+.username-wrapper {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: fit-content;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.room-name-wrapper {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: fit-content;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+}
+
+/*Ensure that the video container will adjust in terms of size for
+  smaller screens.*/
+@media screen and (max-width:1650px) {
+    .video-container {
+        /*The video container will have a width of at least 300 pixels.*/
+        flex-basis: 300px;
+        /*The height of the video container will be a minimum of 200 pixels.*/
+        min-height: 200px;
+    }
+}
+
+#controls-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    column-gap: 1em;
+    position: fixed;
+    bottom: 20px;
+}
+
+.control-icon {
+    height: 20px;
+    width: 20px;
+    box-shadow: var(--shaddow);
+    /*#fff is the colour white.*/
+    background-color: #fff;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#leave-btn {
+    background-color: rgb(255, 80, 80, 1);
+}
+
+/*135*/

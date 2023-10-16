@@ -1,0 +1,304 @@
+{% load static %}
+
+<!--This is the base template which other templates will inherit from.-->
+
+<!--Here I am adding several buttons to the navigation bar located on the
+    top of the web page while also displaying posts made by existing users.-->
+
+<!--Open up a code block. Loading the CSS from the 'static' directory.-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .asteriskField {
+            display: none;
+        }
+
+        .btn {
+            background-color: #5f788a;
+            border: none;
+            color: white;
+            padding: 14px 16px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: rgba(255, 255, 255, .5);
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 1rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.4;
+            background-color: #FFFFFF;
+            color: black;
+            padding: 0.2rem;
+            border-radius: 10px;
+        }
+
+        .time-container {
+            text-align: center;
+            margin: 0px auto;
+        }
+
+        .TimeDisplay {
+            text-align: center;
+            font-size: 1.8rem;
+            border: 0.3rem solid black;
+            margin: 0px auto;
+            padding: 0.3rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            min-width: 11rem;
+        }
+
+        #scroll-container {
+            border: 3px solid black;
+            border-radius: 5px;
+            /*If the height of the perimeter is not tall enough, the text
+            will not start scrolling down at the beginning of the perimeter.*/
+            height: 1200px;
+
+            /*Set the overflow to hidden, so that the user doesn't
+            see the cities scrolling down outside of the perimeter.*/
+            overflow: hidden;
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            background-color: pink;
+        }
+
+        #scroll-text {
+            height: 100%;
+            text-align: center;
+
+            -moz-transform: translateY(-100%);
+            -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+
+            -moz-animation: my-animation 55s linear infinite;
+            -webkit-animation: my-animation 55s linear infinite;
+            animation: my-animation 55s linear infinite;
+        }
+
+        /*If using Firefox.*/
+        @-moz-keyframes my-animation {
+            from {
+                -moz-transform: translateY(-100%);
+            }
+
+            to {
+                -moz-transform: translateY(100%);
+            }
+        }
+
+        /*If using Chrome.*/
+        @-webkit-keyframes my-animation {
+            from {
+                -webkit-transform: translateY(-100%);
+            }
+
+            to {
+                -webkit-transform: translateY(100%);
+            }
+        }
+
+        @keyframes my-animation {
+            from {
+                -moz-transform: translateY(-100%);
+                -webkit-transform: translateY(-100%);
+                transform: translateY(-100%);
+            }
+
+            to {
+                -moz-transform: translateY(100%);
+                -webkit-transform: translateY(100%);
+                transform: translateY(100%);
+            }
+        }
+    </style>
+    <!--Boostrap has been added below. Bootstrap is a free and open source development 
+          front end framework for the creation of websites and web apps.-->
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!--This indicates that the link that is a style sheet with a type that is CSS.-->
+    <!--href will indicate where the CSS file is located.-->
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/navigation_bar.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!--Add a title to the webpage.-->
+    {% if title %}
+    <!--If a title exists.-->
+    <title>Django Blog - {{ title }}</title>
+    {% else %}
+    <!--If a title does not exist.-->
+    <title>Django Blog</title>
+    {% endif %}
+    <!--End the if-else statement.-->
+</head>
+
+<body>
+    <header class="site-header">
+        <!--A navigation bar is included with bootstrap CSS classes.-->
+        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+            <button class="btn" style="font-size: 1.3rem;" onclick="window.location.href='/';">
+                <i class="fa fa-home"></i> Home</button>
+
+            <div class="container">
+                <a class="navbar-brand mr-4" href="https://www.djangoproject.com/" target="_blank">Offical Django
+                    Website</a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
+                    aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarToggle">
+                    <div class="navbar-nav mr-auto">
+
+                        <!--If someone clicks on "About", navigate to 'blog-about'.-->
+                        <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
+                    </div>
+                    <!-- Navbar Right Side -->
+                    <div class="navbar-nav">
+                        <!--If the user is already authenticated, it means that they are logged in. 
+                        Display the link to the logout route.-->
+                        {% if user.is_authenticated %}
+                        <a class="nav-item nav-link" href="{% url 'facial-login' %}">
+                            Access Admin Page</a>
+                        <a class="nav-item nav-link" href="{% url 'view-menu' %}">View Menu</a>
+                        <a class="nav-item nav-link" href="{% url 'post-create' %}">New Post</a>
+                        <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+                        <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+                        <!--If the user is not authenticated, then they are logged out, so
+                        display the link to the 'login' route and the 'register' route.-->
+                        {% else %}
+                        <!--'login' will be the URL for the "Login" route.-->
+                        <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                        <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+                        {% endif %}
+                    </div>
+                </div>
+        </nav>
+    </header>
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-8">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% block content %}{% endblock %}
+            </div>
+
+            <div class="col-md-4">
+                <div id="scroll-container">
+                    <div id="scroll-text">
+                        <div class="time-container">
+                            <h2>Pago Pago <br>
+                                American Samoa 🇦🇸
+                            </h2>
+                            <div id="rootSamoa" class="TimeDisplay"></div><br>
+                        </div>
+
+                        <div class="time-container">
+                            <h2>New York <br>
+                                United States 🇺🇸
+                            </h2>
+                            <div id="rootNewYork" class="TimeDisplay"></div><br>
+                        </div>
+
+                        <div class="time-container">
+                            <h2>Vienna <br>
+                                Austria 🇦🇹
+                            </h2>
+                            <div id="rootVienna" class="TimeDisplay"></div><br>
+                        </div>
+
+                        <div class="time-container">
+                            <h2>Addis Ababa <br>
+                                Ethiopia 🇪🇹
+                            </h2>
+                            <div id="rootAddisAbaba" class="TimeDisplay"></div><br>
+                        </div>
+
+                        <div class="time-container">
+                            <h2>Baku <br>
+                                Azerbaijan 🇦🇿
+                            </h2>
+                            <div id="rootBaku" class="TimeDisplay"></div><br>
+                        </div>
+
+                        <div class="time-container">
+                            <h2>Bangkok <br>
+                                Thailand 🇹🇭
+                            </h2>
+                            <div id="rootBangkok" class="TimeDisplay"></div><br>
+                        </div>
+
+                        <div class="time-container">
+                            <h2>Tarawa <br>
+                                Kiribati 🇰🇮
+                            </h2>
+                            <div id="rootTarawa" class="TimeDisplay"></div><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- Adding this allows us to use bootstrap specific CSS classes.-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <!--The home and about templates will inherit this base template and have this information.-->
+
+    <script>
+
+        const g_TimeDisplay = document.getElementsByClassName('TimeDisplay');
+
+        const g_TimeZones = ["Pacific/Samoa", "America/New_York", "Europe/Vienna",
+            "Africa/Addis_Ababa", "Asia/Baku", "Asia/Bangkok", "Pacific/Tarawa"]
+
+        for (let i = 0; i < g_TimeDisplay.length; i++) {
+            setInterval(function Tick() {
+                let time = new Date()
+                let date = new Date()
+
+                time = time.toLocaleTimeString("en-US", { timeZone: g_TimeZones[i] })
+                date = date.toLocaleDateString("en-US", { timeZone: g_TimeZones[i] })
+
+                g_TimeDisplay[i].innerText = time + "\n" + date
+            }, 1000);
+        }
+
+    </script>
+</body>
+
+</html>
+
+<!--94-->

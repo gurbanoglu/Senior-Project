@@ -1,0 +1,66 @@
+<!--This is the home template for the "blog" application.-->
+
+{% extends "blog/base.html" %}
+
+{% block content %}
+    <!--"view.kwargs.username" will grab the username that is passed in to the URL.-->
+    <!--"page_obj.paginator.count" will return the total number of objects along all
+        of the pages in the paginator.-->
+    <h1 class="mb-3">Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
+
+    <!--Open a code block by using curly braces and percent signs.-->
+    {% for post in posts %}
+        <article class="media content-section">
+            <img class="rounded-circle article-img"
+                 src="{{ post.m_author.profile.m_Profile_Image.url }}">
+            <div class="media-body">
+            <div class="article-metadata">
+                <!--Provide a link with href so the user can go to the current user's
+                    users page. "url" indicates that a URL link is being added. The url
+                    is called 'user-posts'. The username that will be linked is the username
+                    of "post.m_author".-->
+                <a class="mr-2" href="{% url 'user-posts' post.m_author.username %}">
+                    {{ post.m_author }}</a>
+                <small class="text-muted">{{ post.m_datePosted|date:"F d, Y" }}</small>
+            </div>
+            <h2><a class="article-title" href="{% url 'post-detail' post.id %}">
+                {{ post.m_title }}</a></h2>
+            <p class="article-content">{{ post.m_content }}</p>
+            </div>
+        </article>
+    {% endfor %}
+
+    <!--A nested if statement was necessary to implement here because before
+        checking if the current page object has the previous page and the next
+        page, it makes sense to check if the current page object has been
+        paginated first.-->
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+
+            <a class="btn btn-outline-info mb-4" 
+                href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+        
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a class="btn btn-outline-info mb-4" 
+                href="?page={{ page_obj.next_page_number }}">Next</a>
+
+            <a class="btn btn-outline-info mb-4" 
+                href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% endif %}
+
+    {% endif %}
+
+{% endblock content %}
+
+<!--41-->

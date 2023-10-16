@@ -1,0 +1,21 @@
+{% extends "blog/base.html" %}
+
+<!--Informing the user that they have been logged out while giving them
+    the option of logging back in, is the pupose of this template.-->
+{% block content %}
+    <h2 style="font-size: 40px;">You have been logged out.</h2>
+    <div class="border-top pt-3">
+        <!--"text-muted" is a dull text style.-->
+        <center>
+            <small class="text-muted">
+                <!--'login' will be part of the URL for the login page.-->
+                <a href="{% url 'login' %}" style="font-size: 30px;">Log In Again</a>
+                <!--href is an anchor tag which allows a link to the log in page.-->
+                <!--The link will say "Log In Again".-->
+                <!--"ml-2" means a left margin with a value of two.-->
+            </small>
+        </center>
+    </div>
+{% endblock content %}
+
+<!--12-->

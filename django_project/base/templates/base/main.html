@@ -1,0 +1,24 @@
+<!--This file is where the Agora Software Development Kit is referenced,
+    for the sake of making the video chat function properly.-->
+
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Video Meeting Room</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' 
+          href="{% static 'styles/video-meeting.css' %}">
+    <script src="{% static 'js/main.js' %}"></script>
+</head>
+<body>
+    {% block content %}
+    <!--Here is where all of the child templates are being wrapped.-->
+    {% endblock content %}
+</body>
+
+</html>
+
+<!--16-->

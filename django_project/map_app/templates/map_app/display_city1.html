@@ -1,0 +1,64 @@
+{% load static %}
+{% load embed_video_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'styles/city.css' %}" type="text/css"/>
+</head>
+<body>
+    <div class="container">
+        <img src="{% static '/images/buenos-aires.png' %}" alt="Buenos Aires"/>
+
+        <div class="content">
+            <br>
+            <h1 style="font-size: 2em; color: rgb(152, 231, 156)">Buenos Aires</h1>
+            <br>
+            <u><b>City Attractions</b></u>
+            <li><a href="{% url 'plaza-de-mayo' %}">Plaza de Mayo</a></li>
+            <li><a href="{% url 'caminito' %}">Caminito</a></li>
+            <li><a href="{% url 'recoleta-cemetery' %}">Recoleta Cemetery</a></li>
+            <br><br>
+
+            <b><a class="videos"
+                href="{% url 'buenos-aires-videos' %}">Travel Videos</a></b><br><br>
+
+            <b><a class="videos"
+                href="{% url 'buenos-aires-history' %}">History of Buenos Aires</a></b>
+
+            <br><br>
+            <u><b>Hotel Cost</b></u>
+            <li>Five Star Average: $170 per night</li>
+            <li>Five Star Average: $82 per night</li>
+
+            <!--Setting "_blank" to 'target' will ensure that the link opens in
+                another tab.-->
+            <li><a href="https://www.booking.com/fivestars/city/ar/buenos-aires.html"
+                target="_blank">5-Star Hotels in Buenos Aires</a></li>
+            <li><a href="https://www.tripadvisor.com/SmartDeals-g312741-zft9568-Buenos_Aires_Capital_Federal_District-Hotel-Deals.html"
+                target="_blank">3-Star Hotels in Buenos Aires</a></li>
+            <br>
+            <u><b>Average Daily Dining Cost</b></u>
+            <li>Per Person: $22 each day</li><br>
+            <li>Tip Percentage: 10-15%</li><br>
+
+            <u><b>Average Daily Expenditure</b></u>
+            <li>Per Person: $56</li>
+
+            <br><b><a class="videos"
+                href="{% url 'buenos-aires-english-and-transportation' %}">
+                English Proficiency & Transportation</a></b><br>
+
+            <br><b><a class="videos" href="{% url 'buenos-aires-details' %}">
+                Important Details</a></b><br>
+
+            <br><u><b>Hottest Month</b></u>
+            <li>January (Average High: 82°F)</li>
+
+            <br><u><b>Coldest Month</b></u>
+            <li>July (Average Low: 47°F)</li>
+        </div>
+    </div>
+</body>
+</html>
+
+<!--52-->

@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'styles/hover-button.css' %}" type="text/css"/>
+</head>
+<body>
+<br><br><br><br><br>
+<center>
+    <h style="font-size: 3em;">Error!</h>
+
+    <p style="font-size: 2.5em;">The location you were searching for was not found.</p>
+
+    <a class="button" href="{% url 'display-map' %}">Return To The Search Map</a>
+</center>
+
+</body>
+</html>
+
+<!--15-->

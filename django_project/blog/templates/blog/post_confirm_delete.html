@@ -1,0 +1,29 @@
+<!--This is the template for the "PostCreateView" and "PostUpdateView".-->
+
+{% extends "blog/base.html" %}
+
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <!--"form-group" is a bootstrap class.-->
+            <fieldset class="form-group"> 
+                <legend class="border-bottom mb-4">Delete Post</legend>
+                <h2>Are you sure you want to delete the post "{{ object.m_title }}"</h2>         
+            </fieldset>
+            <div class="form-group">
+                <!--Use the "outline-danger" class because a deletion should have a visual warning.-->
+                <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
+
+                <!--Instead of being a button that will submit, I changed this to an anchor tag.-->
+                <!--The "href" will direct us back to the detail view of the post by creating 
+                    a URL of the 'post-detail' page for "object.id" (the post ID).-->
+                <!--For the "Cancel" button, I used the "secondary" bootstrap style.-->
+                <a class="btn btn-outline-secondary" 
+                    href="{% url 'post-detail' object.id %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
+
+<!--19-->

@@ -1,0 +1,89 @@
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'styles/city.css' %}" type="text/css"/>
+
+    <style>
+    body, html {
+        height: 100%;
+        margin: 0;
+    }
+
+    .change-background {
+        height: 115%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        animation-name: ChangeBackground;
+        animation-direction: alternate;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        animation-duration: 15s;
+    }
+
+    @keyframes ChangeBackground {
+        0% {
+            background-image: url("{{ STATIC_PREFIX }}images/SaintPetersburgMetro/avtovo-station.jpg");
+        }
+        50% {
+            background-image: url("{{ STATIC_PREFIX }}images/SaintPetersburgMetro/kirovsky-zavod.jpg");
+        }
+        100% {
+            background-image: url("{{ STATIC_PREFIX }}images/SaintPetersburgMetro/zvenigorodskaya.jpg");
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="change-background"></div>
+
+    <div class="text-block">
+        <h1 style="font-size: 2em; color: orange">English Proficiency & Transportation</h1>
+        
+        <br>
+        <u><b>English Proficiency</b></u>
+        <li>Although some basic English proficiency can be found in Saint <br> &nbsp;&emsp;
+            Petersburg, keep in mind that only 13% of Russians have <br> &nbsp;&emsp; some 
+            knowledge in English.
+        </li>
+        <br>
+        <li>It is recommended to learn some essential words before arriving: <br> &nbsp;&emsp;
+            <a href="https://www.tripsavvy.com/basic-russian-vocabulary-for-travelers-4165285"
+            target="_blank">Basic Russian Vocabulary for Travelers</a>
+        </li>
+        <br>
+        <li>Russians use the Cyrillic alphabet which was given to their ancestors <br>
+            &nbsp;&emsp; in the ninth century by a Greek monk named Cyril. Those who can
+            <br> &nbsp;&emsp; only read a latin alphabet will not be able to read street
+            signs in Saint <br> &nbsp;&emsp; Petersburg unless they are shown in latin.</li>
+        
+        <br>
+        <u><b>Transportation</b></u>
+        <br>
+        <li>Whilst in Saint Petersburg, it is a unique experience for tourists to ride
+            <br> &nbsp;&emsp; the deepest underground metro in the world. Not simply for
+            its effective <br> &nbsp;&emsp; transportation, but primarily because of its 
+            palace-like appearance.</li>
+        <br>
+        <li>The metro runs seven days a week from 5:40 a.m. to 12:30 a.m.</li>
+        <br>
+        <li>Fares for a single journey cost about $1, but if you will be in Saint <br>
+            &nbsp;&emsp; Petersburg for over a week, you are better off purchasing a
+            travel card <br> &nbsp;&emsp; where you decide how much credit you want to
+            put on it.</li>
+        <br>
+        <li>Privately owned mini-buses called "Marshutkas" where each roams the <br>
+            &nbsp;&emsp; city following a fixed route is a secondary option costing a
+            little over $1 <br> &nbsp;&emsp; for a single ride per person.</li>
+        <br>
+        <li>Do not go with a random person who appears to be a taxi driver as they may
+            <br> &nbsp;&emsp; overcharge you. Instead request a taxi by accessing the mobile
+            apps of Yandex <br> &nbsp;&emsp; Gett, or Taxovichkoff where the payment process 
+            is similar to Uber.</li>
+    </div>
+</body>
+</html>
+
+<!--73-->

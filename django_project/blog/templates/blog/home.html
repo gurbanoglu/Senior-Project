@@ -1,0 +1,88 @@
+<!--This is the home template for the blog application.-->
+
+<!--Extend the base template within the "blog" directory.-->
+{% extends "blog/base.html" %}
+
+<!--The for loop in the home template will override the "block content" section in base.html.
+    To do this, wrap the for loop in a content block.-->
+{% block content %}
+<!--Loop over the posts that are accessible, and are print them out one by one.-->
+{% for post in posts %}
+    <!--Open up a code block by using curly braces and percent signs.-->
+    <article class="media content-section">
+        <!--Add the url of the image associated with the profile of the author of the 
+                    current post.-->
+        <!--Add a bootstrap class to display the image in a circle.-->
+        <img class="rounded-circle article-img" src="{{ post.m_author.profile.m_Profile_Image.url }}">
+        <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2" href="{% url 'user-posts' post.m_author.username %}">
+                    {{ post.m_author }}</a>
+                <!--The subsequent line of code will allow us to format the way the
+                        date is displayed.-->
+                <!--"F" requests the full name of the month.-->
+                <!--"d" requests the day.-->
+                <!--"," separates the day and the year.-->
+                <!--"Y" requests the full month.-->
+                <small class="text-muted">{{ post.m_datePosted|date:"F d, Y" }}</small>
+            </div>
+            <!--E.g. "Blog 1 Updated" will link to 'post-detail'. "post.id" was added to the 
+                    url tag to ensure that the id included in each url link for each post, is 
+                    passed in as the primary key in the url.-->
+            <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.m_title }}</a></h2>
+            <p class="article-content">{{ post.m_content }}</p>
+        </div>
+    </article>
+{% endfor %}
+<!--End the for loop.-->
+
+<!--Display links to other pages that contain other posts.-->
+<!--A nested if statement is necessary here because it only makes sense to
+    check if the current page object has the previous page and the next page
+    if the current page object has been paginated.-->
+{% if is_paginated %}
+    <!--If the current page has a previous page, then provide a
+        link to go to the first page, and a link to go to the
+        previous page.-->
+    {% if page_obj.has_previous %}
+    <!--Link to the first page.-->
+    <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+
+    <!--Link to the previous page.-->
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    <!--Loop over all of the pages in the paginator.-->
+    {% for num in page_obj.paginator.page_range %}
+        <!--Check if it is the current page.-->
+        {% if page_obj.number == num %}
+        <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+
+        <!--While looping through the page range, display the
+            previous two pages and the next two pages.-->
+        <!--Use '|' in this case, as it acts as a filter for the
+            next and previous two pages in the page range.-->
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a class="btn btn-outline-info mb-4"
+            href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+
+    <!--Display a solid button by using "btn btn-info mb-4".-->
+    {% endfor %}
+
+    <!--If the current page object has the next page.-->
+    {% if page_obj.has_next %}
+        <!--Link to the first page-->
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+
+        <!--Link to the last page-->
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        <!--"page_obj.paginator.num_pages" is equal to the total number of pages.-->
+    {% endif %}
+
+{% endif %}
+
+<!--This template carries the responsibility of looping through the
+    list of posts, so that they can be displayed on the home page.-->
+{% endblock content %}
+
+    <!--53-->

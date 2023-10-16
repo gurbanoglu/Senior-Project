@@ -1,0 +1,32 @@
+<!--The content in this HTML template is displayed to the user if they
+    attempt to navigate to the 'facial-login-result' page, yet there
+    isn't a file in their "Downloads" directory titled "submitted_facial_image".
+-->
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'styles/hover-button.css' %}" type="text/css"/>
+</head>
+<body>
+<br><br><br><br><br><br>
+<center>
+    <h style="font-size: 3em;">Error!</h>
+
+    <p style="font-size: 2em;">
+        The necessary file image of your face titled 
+        "submitted_facial_image.jpg" was not found.<br><br>
+        You can either reattempt the facial login, or
+        return to the menu.</p>
+
+    <button class="button" onclick=location.href="{% url 'facial-login' %}">
+        Reattempt Facial Login</button>
+    <button class="button button2" onclick=location.href="{% url 'view-menu' %}">
+        View Menu</button>
+</center>
+
+</body>
+</html>
+
+<!--18-->
