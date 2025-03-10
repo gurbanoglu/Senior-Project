@@ -1,2 +1,4 @@
-/django_project/db.sqlite3
+*.pyc
 /django_project/.venv/
+/django_project/db.sqlite3
+__pycache__/
