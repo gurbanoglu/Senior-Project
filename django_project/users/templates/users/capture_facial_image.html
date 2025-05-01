@@ -1,0 +1,611 @@
+<!-- Load a camera where the user can take an image of
+     their face, and set that image as the facial image
+     for their profile.
+
+     This template will provide the user with buttons that
+     say "Capture Facial Image" and "Download Facial Image".
+     
+     Once the facial image has downloaded, the user can
+     retrieve it from the "Downloads" directory on their
+     computer and upload it to be set at the "Current Facial
+     Login Image" for their profile. -->
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+	<link rel="stylesheet"
+		href="https://www.w3schools.com/w3css/4/w3.css">
+
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+	<style>
+		#capture-facial-image-video-background {
+			position: fixed;
+			right: 0;
+			bottom: 0;
+			max-width: 1351px;
+		}
+
+		#video {
+			border: 1px solid black;
+			width: 500px;
+			height: 500px;
+			object-fit: cover;
+		}
+
+		#photo {
+			border: 1px solid black;
+			width: 500px;
+			height: 500px;
+
+			/* 'cover' was set to 'object-fit' here because
+				 before this the output image would be more
+				 vertically stretched than the input image. */
+			object-fit: cover;
+		}
+
+		#canvas {
+			display: none;
+		}
+
+		.camera {
+			width: 500px;
+			display: inline-block;
+		}
+
+		.output {
+			width: 500px;
+			display: inline-block;
+		}
+
+		#start-btn {
+			display: block;
+			position: relative;
+			margin-left: auto;
+			margin-right: auto;
+			bottom: 43px;
+			padding: 5px;
+			background-color: #6a67ce;
+			border: 1px solid rgba(255, 255, 255, 0.7);
+			font-size: 14px;
+			color: rgba(255, 255, 255, 1.0);
+			cursor: pointer;
+		}
+
+		#download-image-btn {
+			display: block;
+			position: relative;
+			margin-left: auto;
+			margin-right: auto;
+			bottom: 36px;
+			padding: 5px;
+			background-color: #6a67ce;
+			border: 1px solid rgba(255, 255, 255, 0.7);
+			font-size: 14px;
+			color: rgba(255, 255, 255, 1.0);
+			cursor: pointer;
+		}
+
+		.content-area {
+			position: relative;
+			top: 30px;
+			font-size: 16px;
+			font-family: Arial;
+			text-align: center;
+		}
+
+		.w3-modal-content {
+			width: 700px;
+			border-radius: 12px;
+			padding: 0px;
+			border: 5px solid #009688;
+		}
+
+		.w3-container {
+			padding: 5px;
+		}
+
+		.indent-bullet {
+			margin-left: -15px;
+			font-size: 1.2em;
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<video autoplay muted loop id="capture-facial-image-video-background">
+			<source src="{% static 'video-backgrounds/islands.mp4' %}"
+				type="video/mp4">
+		</video>
+	</div>
+
+	<div class="content-area">
+		<h1 align="center"
+			style="color: white; font-weight: bold;">
+			Capture Facial Image
+		</h1>
+
+		<div class="camera">
+			<video id="video">
+				Video stream not available.
+			</video>
+		</div>
+
+		<button id="start-btn">
+			Capture Facial Image
+		</button>
+
+		<canvas id="canvas"></canvas>
+
+		<div class="output">
+			<img id="photo"
+				alt="The image captured from the camera will appear in this box.">
+		</div>
+
+		<button id="download-image-btn">
+			Download Facial Image
+		</button>
+	</div>
+
+	<div id="guidelines" class="w3-modal">
+		<div class="w3-modal-content w3-animate-zoom w3-card-4">
+			<header class="w3-container w3-teal">
+				<center>
+					<h style="font-size: 1.5em; font-weight: bold;">
+						First time doing this? Read	the guidelines below!
+						Otherwise, proceed to capture a facial image for
+						your profile.
+					</h>
+				</center>
+			</header>
+
+			<div class="w3-container">
+				<u>
+					<b style="font-size: 1.2em;">
+						When capturing a facial image, be sure
+						to honour the following guidelines:
+					</b>
+				</u>
+				<ul class="indent-bullet">
+					<li>
+						Make sure that you are capturing a facial image
+						of yourself in an area with enough light.
+					</li>
+
+					<li>
+						Do not wear anything on your head or face
+						including any kind of glasses or hats.
+					</li>
+
+					<li>
+						Look straight into the camera.
+					</li>
+
+					<li>
+						Position your head so that it is centered relative to
+						the area on the computer where you can view your face
+						being captured by the camera.
+					</li>
+
+					<li>
+						Keep your face no more than one foot
+						away from the computer's camera.
+					</li>
+				</ul>
+			</div>
+
+			<footer class="w3-container w3-teal">
+				<center>
+					<span
+						onclick="document.getElementById('guidelines').style.display='none'"
+						class="btn btn-danger">
+						Proceed
+					</span>
+
+					<button onclick=location.href="{% url 'view-menu' %}"
+						class="btn btn-warning">
+						View Menu
+					</button>
+
+					<button onclick=location.href="{% url 'profile' %}"
+						class="btn btn-default">
+						Return To Profile Page
+					</button>
+				</center>
+			</footer>
+		</div>
+	</div>
+
+	<div id="modal" class="w3-modal">
+		<div class="w3-modal-content w3-animate-zoom w3-card-4">
+			<header class="w3-container w3-teal">
+				<center>
+					<h style="font-size: 2em; font-weight: bold;">
+						Follow The Steps Below
+					</h>
+				</center>
+			</header>
+
+			<div class="w3-container">
+				<center>
+					<b style="font-size: 1.5em;">
+						Your facial image has now been downloaded
+						into the "Downloads" folder on your computer.
+					</b>
+				</center>
+
+				<br>
+
+				<p>
+					1. Navigate to your account's "Profile" page.
+					   <br><br>
+					2. On the bottom of your account's "Profile" page
+					   where it says "Facial Image", under that click
+						 "Choose File".
+						 <br><br>
+					3. Go into your "Downloads" folder and select the
+						 image file that was just downloaded. <br><br>
+					4. Lastly, click "Update".
+				</p>
+			</div>
+
+			<footer class="w3-container w3-teal">
+				<center>
+					<button
+						onclick="window.open(g_profilePage, '_blank'); return false;"
+						class="btn btn-default">
+						Go To Profile Page
+					</button>
+
+					<button onclick=location.href="{% url 'view-menu' %}"
+						class="btn btn-warning">
+						View Menu
+					</button>
+
+					<span
+						onclick="document.getElementById('modal').style.display='none'"
+						class="btn btn-danger">
+						Stay On This Page
+					</span>
+				</center>
+			</footer>
+		</div>
+	</div>
+
+	<script>
+		let g_profilePage = "{% url 'profile' %}";
+
+		/*
+		function ()
+		
+		NAME
+
+			function - initialises variables and defines the functions
+			necessary to have the computer's webcam capture the aura in
+			front of it.
+
+		SYNOPSIS
+		
+			function ClearPhoto()
+				This function does not accept any parameters.
+		
+		DESCRIPTION
+		
+			This function initialises several variables about to
+			be utilised subsequently in the StartUp(), ClearPhoto(),
+			and TakePicture() functions which are defined in this
+			function.
+
+			The outcome is that the computer's webcam will have the
+			ability to take a snapshop of the current content it sees.
+
+		RETURNS
+		
+			This function does not return anything.
+
+		*/
+		// The following function is less than 100 lines.
+		(function () {
+			var video = null;
+			var canvas = null;
+			var photo = null;
+			var startButton = null;
+			var streaming = false;
+
+			var width = 500;
+			var height = 0;
+
+			/*
+			function StartUp()
+			
+			NAME
+			
+				StartUp - loads the camera on a user's computer for
+				capturing an image. Secondly, the function displays
+				what the camera is capturing before the user clicks
+				the "Capture Facial Image" button.
+			
+			SYNOPSIS
+			
+				function StartUp()
+					This function does not accept any parameters.
+			
+			DESCRIPTION
+			
+				This function first gets the "video", "canvas",
+				"photo", and "startButton" elements by their IDs.
+
+				It then prompts the user for permission to use a video
+				input stream. This grants the program access to the
+				camera on a person's computer.
+
+				If the user agent can play the media, but not enough
+				data has been loaded to play the media up t its end,
+				the "canplay" event is fired while the "height" and
+				"width" attributes are set for the "video" and "canvas"
+				elements. 
+
+				If the button associated with the "startButton" element
+				is clicked, the event listener will call the
+				TakePicture() function.
+
+				Before leaving this function, the ClearPhoto() function
+				is called which is described below.
+
+			RETURNS
+			
+				Nothing needs to be returned by this function.
+			
+			*/
+			function StartUp() {
+				video = document.getElementById('video');
+				canvas = document.getElementById('canvas');
+				photo = document.getElementById('photo');
+
+				startButton = document.getElementById('start-btn');
+
+				navigator.mediaDevices.getUserMedia({
+					video: true,
+					audio: false
+				})
+				.then(function (a_stream) {
+					video.srcObject = a_stream;
+					video.play();
+				})
+				.catch(function (a_error) {
+					console.log("An error occurred: " + a_error);
+				});
+
+				/* It is necessary to have a nested if statement here
+					 because before checking if the height of the "canvas"
+					 element is not a number, ensure that the "video"
+					 element is not streaming. Secondly, if the "video"
+					 element is not streaming, and the height of the "canvas"
+					 element is a number, other actions must still occur
+					 inside the event listener for the "video" element.
+
+					 This is why checking that the "video" element is not
+					 streaming and that the height of the "canvas" element
+					 is not a number, cannot be done in the same if statement. */
+				video.addEventListener('canplay', function () {
+					if (!streaming) {
+						height = video.videoHeight / (video.videoWidth / width);
+
+						if (isNaN(height))
+							height = width / (4 / 3);
+
+						video.setAttribute('width', width);
+						video.setAttribute('height', height);
+						canvas.setAttribute('width', width);
+						canvas.setAttribute('height', height);
+						streaming = true;
+					}
+				}, false);
+
+				startButton.addEventListener('click', function (a_event) {
+					TakePicture();
+					a_event.preventDefault();
+				}, false);
+
+				ClearPhoto();
+			}
+			/*function StartUp() */
+
+			var facialImageURL = null;
+
+			/*
+			function ClearPhoto()
+			
+			NAME
+			
+				ClearPhoto - collects the frames of the photo from
+				the "canvas" element, and then converts it into JPG
+				file format, so that it can be shown in the HTML
+				template.
+
+			SYNOPSIS
+			
+				function ClearPhoto()
+					This function does not accept any parameters.
+			
+			DESCRIPTION
+			
+				This function uses the getContext() method to obtain
+				a drawing context on the canvas. The drawing context
+				will be a CanvasRenderingContext2D object representing
+				a two-dimensional rendering context. This is due to
+				the "2d" argument passed to the getContext() function.
+
+				The CanvasRenderingContext2D.fillStyle property specifies
+				that the colour inside the shape will be "#AAA".
+
+				The fillRect() method draws a rectangle that is filled
+				in accordance to the fillStyle property. The fillRect()
+				method takes the width and height of the canvas into
+				account when drawing the rectangle.
+
+				Then, the toDataURL() method is utilised to generate a
+				URL containing a representation of the facial image in
+				the format of "image/jpg". The "facialImageURL" variable
+				will store this URL.
+
+				Lastly, the setAttribute() method will assign the URL
+				link stored in the "facialImageURL" variable to the
+				"src" attribute.
+
+				The value of the "src" attribute is being set on the
+				"photo" element.
+
+			RETURNS
+			
+				Nothing needs to be returned by this function.
+			
+			*/
+			function ClearPhoto() {
+				var context = canvas.getContext('2d');
+				context.fillStyle = "#AAA";
+				context.fillRect(0, 0, canvas.width, canvas.height);
+
+				facialImageURL = canvas.toDataURL('image/jpg');
+
+				photo.setAttribute('src', facialImageURL);
+			}
+			/*function ClearPhoto() */
+
+			/*
+			function TakePicture()
+			
+			NAME
+			
+				TakePicture - captures a frame from the video stream.
+
+			SYNOPSIS
+			
+				function TakePicture()
+					This function does not accept any parameters.
+			
+			DESCRIPTION
+			
+				This function uses the getContext() method to acquire
+				a drawing context on the canvas. The drawing context
+				will be a CanvasRenderingContext2D object representing
+				a two-dimensional rendering context. This is due to
+				the "2d" argument passed to the getContext() function.
+
+				If the "width" and "height" variables are both greater
+				than zero, the "width" and "height" of the "canvas"
+				element will be assigned the values of these two variables.
+
+				(0, 0) represents the (dx, dy) coordinates where the
+				drawImage() method will begin drawing from. The "width"
+				and "height" variables will regulate the dimensions of
+				the image drawn. Since the first argument of the
+				drawImage() function is "video", this specifies that
+				the "video" element shall be drawn into the context.
+
+				Then, the toDataURL() method is utilised to generate a URL containing
+				a representation of the facial image in the format of "image/jpg".
+				The "facialImageURL" variable will store this URL.
+
+				Lastly, the setAttribute() method will assign the URL link stored in
+				the "facialImageURL" variable to the "src" attribute.
+
+				The value of the "src" attribute is being set on the "photo" element.
+
+				Otherwise, if the "width" and "height" are not both greater than zero,
+				the ClearPhoto() function will be called.
+
+			RETURNS
+			
+				Nothing needs to be returned by this function.
+			
+			*/
+			function TakePicture() {
+				var context = canvas.getContext('2d');
+
+				if (width && height) {
+					canvas.width = width;
+					canvas.height = height;
+
+					context.drawImage(video, 0, 0, width, height);
+
+					facialImageURL = canvas.toDataURL('image/jpg');
+
+					photo.setAttribute('src', facialImageURL);
+				} else {
+					ClearPhoto();
+				}
+			}
+			/*function TakePicture() */
+
+			window.addEventListener('load', StartUp, false);
+		})();
+		/*function () */
+
+		const g_DownloadImageButton = document.getElementById('download-image-btn');
+
+		/* Downloads the facial image captured by the
+		   camera and guarantees that the downloaded
+			 file image will have ".jpg" as its extension.
+
+			 A modal filled with steps explaining how to
+			 set the downloaded file image as the "Facial
+			 Image" of your profile appears subsequently. */
+		g_DownloadImageButton.addEventListener('click', function () {
+			console.log(canvas.toDataURL());
+			const Link = document.createElement('a');
+
+			var facialImageFileName = window.prompt(
+					"An image of your face will now be downloaded. \nEnter the name you would like to give the file: ");
+
+			let hasDot = facialImageFileName.includes(".");
+
+			/* If the name of the file image that was given
+			   by the user contains a "." character, then all
+				 of the characters after that character will be
+				 removed, and the file extension ".jpg" will be
+				 concatenated to the end of the file image name.
+				
+				 Otherwise, if the file image name does not
+				 contain a "." character, ".jpg" will simply
+				 be concatenated to the end of the file image
+				 name. */
+			if (hasDot) {
+				let indexOfLastDot = facialImageFileName.lastIndexOf(".");
+				facialImageFileName = facialImageFileName.slice(0, indexOfLastDot + 1);
+				facialImageFileName = facialImageFileName.concat("jpg");
+			} else {
+				facialImageFileName = facialImageFileName.concat(".jpg");
+			}
+
+			Link.download = facialImageFileName;
+			Link.href = canvas.toDataURL();
+			Link.click();
+			Link.delete;
+
+			var modal = document.getElementById("modal");
+
+			// Display the modal.
+			modal.style.display = "block";
+		});
+
+		/* A modal named "guidelines" explaining the
+		   directions on how to properly capture a
+			 facial image will be displayed once the
+			 Document Object Model is ready for the
+			 JavaScript code to execute. */
+		$(document).ready(function () {
+			var guidelines = document.getElementById("guidelines");
+			guidelines.style.display = "block";
+		});
+	</script>
+</body>
+</html>
+
+<!-- 226 -->

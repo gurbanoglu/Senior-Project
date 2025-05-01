@@ -1,0 +1,100 @@
+<!-- This template is responsible for displaying the
+     navigation bar on the menu page where users of
+     the application have the options to access two
+     different world map, see the weather in a city,
+     take an exam, or join a video meeting room. -->
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet"
+		href="{% static 'styles/navigation-bar.css' %}" type="text/css" />
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+		body {
+			/* 'margin' is set to zero because I wanted
+					the navigation bar to be at the top of the
+					web page, but still act as a dropdown menu. */
+			margin: 0;
+			font-family: Arial, Helvetica, sans-serif;
+		}
+
+		.contentarea {
+			position: relative;
+			top: 120px;
+			font-size: 16px;
+			font-family: Arial;
+			text-align: center;
+		}
+
+		#video-background {
+			position: fixed;
+			right: 0;
+			top: 46px;
+			width: 1366px;
+		}
+
+		a.btn {
+			background-color: #333;
+			border: none;
+			color: white;
+			padding: 14px 16px;
+			font-size: 16px;
+			cursor: pointer;
+		}
+
+		a.btn:hover {
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+	<div class="navbar">
+		<a class="btn" href="/"><i class="fa fa-home"></i> Home</a>
+
+		<div class="dropdown">
+			<button class="dropbtn">World Map
+				<i class="fa fa-caret-down"></i>
+			</button>
+
+			<div class="dropdown-content">
+				<a href="{% url 'search-map' %}">
+						Locate A City By Itself
+				</a>
+				<a href="{% url 'display-cities' %}">
+					View International Cities
+				</a>
+			</div>
+		</div>
+
+		<a href="{% url 'search-weather' %}">Search City Weather</a>
+
+		<a href="{% url 'Exams:view-exams' %}">View Exams</a>
+
+		<a href="{% url 'lobby' %}">Join A Video Meeting Room</a>
+	</div>
+
+	<div>
+		<video autoplay muted loop id="video-background">
+			<source
+				src="{% static 'video-backgrounds/coast-line.mp4' %}"
+				type="video/mp4">
+		</video>
+	</div>
+
+	<div class="contentarea">
+		<h1 style="color: white; font-size: 2.5em;">
+			Welcome To The Menu
+		</h1>
+
+		<p style="color: white; font-size: 1.5em;">
+			Select One of The Options From The Above Navigation Bar.
+		</p>
+	</div>
+</body>
+</html>
+
+<!-- 67 -->

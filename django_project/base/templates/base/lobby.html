@@ -1,0 +1,179 @@
+<!-- A template where the user can sign in by
+     entering their name, and join a video
+		 chat room. -->
+
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+	<style>
+		.navbar {
+			overflow: hidden;
+			background-color: #333;
+			width: 1366px;
+			height: 46px;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+		}
+
+		.navbar a {
+			font-size: 16px;
+			color: white;
+			position: absolute;
+			left: 0px;
+			padding: 14px 16px;
+			text-decoration: none;
+		}
+
+		.navbar a.two {
+			font-size: 16px;
+			color: white;
+			position: absolute;
+			left: 120px;
+			text-decoration: none;
+		}
+
+		.navbar a:hover,
+		.dropdown:hover .dropbtn {
+			background-color: red;
+		}
+	</style>
+</head>
+
+<main>
+	<div class="navbar">
+		<a href="/">Home Page</a>
+		<a class="two" href="{% url 'view-menu' %}">View Menu</a>
+	</div>
+
+	<br><br>
+
+	<section id="form-container">
+		<img id="logo" src="{% static 'images/live-chat.png' %}" />
+
+		<div id="welcome-message">
+			<h1>Hello! Sign In To Join A Video Meeting Room.</h1>
+			<p>The feature allows you to communicate with 
+				 multiple people via audio.</p>
+		</div>
+
+		<form id="form">
+			<div class="field-wrapper">
+				<!-- The names inside the video meeting room are
+				 		 case sensitive.
+
+						 The room names are automatically made uppercase
+						 as shown below. -->
+				<div class="form-field">
+					<label>Room:</label>
+					<input name="room" placeholder="Enter a room name..."
+						style="text-transform:uppercase" />
+				</div>
+
+				<div class="form-field">
+					<label>Name:</label>
+					<input name="name" placeholder="Enter your name..."
+						style="text-transform:uppercase" />
+				</div>
+
+				<div class="form-field">
+					<input type="submit" value="Join Stream" />
+				</div>
+			</div>
+		</form>
+	</section>
+</main>
+
+<script>
+	/*
+	HandleSubmit = async () =>
+
+	NAME
+
+		HandleSubmit - processes users who join a video meeting room.
+
+	SYNOPSIS
+
+		let HandleSubmit = async (a_event) =>
+			a_event        --> the event interface which comes
+			from the process of submitting the form in the HTML
+			code above.
+
+	DESCRIPTION
+
+		This function will handle the submission of the
+		form that is written in the HTML source code above.
+		The input elements being submitted in the form will
+		be "room" and "name".
+
+		A response from the server is retrieved with the aid
+		of the fetch() method in JavaScript which makes a
+		request to a URL. The URL where the request is being
+		made must have the name of the video meeting room
+		assigned to "channel".
+
+		After receiving data back from the fetch() call, the
+		user ID and token are stored, and set in a
+		"sessionStorage" object which permits the storing of
+		key/value pairs in a browser.
+
+	RETURNS
+
+		Doesn't return anything, but will open a
+		video meeting room for the user to join.
+
+	*/
+
+
+	let HandleSubmit = async (a_event) => {
+		/* "a_event.preventDefault()" will stop
+			 the default actions of the form. */
+		a_event.preventDefault()
+
+		/* Get the room name in uppercase characters. */
+		let room = a_event.target.room.value.toUpperCase()
+
+		/* Get the name value. */
+		let name = a_event.target.name.value
+
+		let response = await fetch(`/get_token/?channel=${room}`)
+
+		/* Wait to receive the data back from
+			 the above fetch() call. */
+		let data = await response.json()
+
+		/* Get the user ID. */
+		let userID = data.userID
+
+		/* Get the token. */
+		let token = data.token
+
+		/* Set the user ID and token.
+			
+			 These variables must be stored in the session
+			 because they should be detached as soon as a
+			 user leaves the chat room. */
+		sessionStorage.setItem('userID', userID)
+		sessionStorage.setItem('token', token)
+		sessionStorage.setItem('room', room)
+		sessionStorage.setItem('name', name)
+
+		/* '_self' will make sure that the doesn't open
+			 in a new tab when the user is redirected to
+			 the next page. */
+		window.open('/room/', '_self')
+	}
+	/* let HandleSubmit = async (a_event) => */
+
+	let g_form = document.getElementById('form')
+
+	/* Whenever the form is submitted,
+	   "handleSubmit" will be called. */
+	g_form.addEventListener('submit', HandleSubmit)
+</script>
+
+{% endblock content %}
+
+<!-- 55 -->

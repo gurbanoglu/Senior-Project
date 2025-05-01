@@ -1,0 +1,26 @@
+{% extends "blog/base.html" %} 
+<!-- Here the base template is being extended within
+		 the "blog" directory. This is called template
+		 inheritance. The about template is inheriting
+		 from the base template. -->
+
+<!-- The "about" view must render this template. -->
+
+<!-- The purpose of this file is to explain what
+     the web application encompasses. -->
+
+<!-- Below is the code that is unique to the "about"
+     template. -->
+{% block blog_content %}
+	<h1>
+		<br>
+		This web application provides you with the features of accessing the
+		administrator's section of the web application by means of a facial
+		image that is recognised, searching for the weather, joining a 
+		video meeting room, taking an exam, geographically locating an 
+		international city, and gaining an understanding of what you can see 
+		as a tourist in certain destinations.
+  </h1>
+{% endblock blog_content %}
+
+<!-- 11 -->

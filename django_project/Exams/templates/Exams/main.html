@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+<!-- This HTML template is responsible for
+     verifying if the user would like to
+     begin a specific exam, showing the
+		 information related to that exam, and
+     providing them with "Yes" and "No"
+		 buttons all encompassed by a modal box
+		 popup. -->
+
+{% block scripts %}
+  <script src="{% static 'Exams/main.js' %}" defer></script>
+{% endblock scripts %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block styles %}
+<style>
+.navbar {
+	overflow: hidden;
+	background-color: #333;
+	width: 1366px;
+	height: 46px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+.navbar a {
+	font-size: 16px;
+	color: white;
+	position: absolute;
+	left: 0px;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+.navbar a.two {
+	font-size: 16px;
+	color: white;
+	position: absolute;
+	left: 120px;
+	text-decoration: none;
+}
+
+.navbar a:hover, .dropdown:hover
+.dropbtn {
+  background-color: red;
+}
+</style>
+
+<link rel="stylesheet"
+	href="{% static 'styles/exam.css' %}" type="text/css"/>
+{% endblock %}
+
+{% block content %}
+	<!-- The modal -->
+	<div class="modal fade" id="examStartModal"
+		tabindex="-1" aria-labelledby="exampleModalLabel" 
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">
+						<b>
+							Exam About To Begin
+						</b>
+					</h5>
+
+					<button type="button" class="close"
+						data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">
+							&times;
+						</span>
+					</button>
+				</div>
+
+				<div class="modal-body" id="modal-body-confirm"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="navbar">
+		<a href="/">
+			Home Page
+		</a>
+
+		<a class="two" href="{% url 'view-menu' %}">
+			View Menu
+		</a>
+	</div>
+
+	<br>
+
+	<div class="exams">
+		<div class="h1">
+			Exam List
+		</div>
+
+		<hr>
+
+		{% for obj in object_list %}
+			<button
+				class="btn btn-link modal-button"
+				data-pk="{{ obj.pk }}"
+				data-quiz="{{ obj.m_examName }}"
+				data-questions="{{ obj.m_questionCount }}"
+				data-difficulty="{{ obj.m_difficulty }}"
+				data-time="{{ obj.m_timeLimit }}"
+				data-pass="{{ obj.m_scoreRequiredToPass }}"
+				data-toggle="modal"
+				data-target="#examStartModal">
+				{{ obj.m_examName }}: {{ obj.m_material }}
+			</button>
+
+			<br>
+		{% endfor %}
+	</div>
+
+{% endblock %}
+
+<!-- 43 -->

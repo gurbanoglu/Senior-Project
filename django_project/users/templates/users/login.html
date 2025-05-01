@@ -1,0 +1,76 @@
+{% extends "blog/base.html" %} 
+<!-- Extend the base template within the "blog"
+ 		 directory. This is called template inheritance.
+		 The login template is inheriting from the base
+		 template. Extend the blog/base.html template,
+		 so that even within the "users" app the
+		 templates can be referenced from the "blog"
+		 app. -->
+
+<!-- Allows the use of the crispy
+ 		 filter on any of the forms. -->
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+<!-- Below is the code that is unique
+ 		 to the login template. -->
+{% block blog_content %}
+<head>
+	<link rel="preconnect"
+		href="https://fonts.gstatic.com">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&display=swap" 
+		rel="stylesheet">
+	<link rel="stylesheet"
+		type="text/css" href="{% static 'styles/login-button.css' %}">
+</head>
+
+<div class="content-section">
+	<form method="POST">
+		<!-- If the csrf token is not included, then
+		     the form will be vulnerable to attacks. -->
+		{% csrf_token %}
+
+		<fieldset class="form-group">
+			<!-- Give the form a legend of "Log In". -->
+			<legend class="border-bottom mb-4">
+				Log In
+			</legend>
+
+			{{ form|crispy }}
+			<!-- "crispy" will give the paragraphs
+			 		 higher quality styling. -->
+		</fieldset>
+		<div class="form-group">
+			<!-- I added a "submit" button with "Login" as
+			     the text along with a "neon-button" class
+					 to the button, for styling purposes. -->
+			<button class="neon-button" type="submit">
+				Login
+			</button>
+
+			<a href="{% url 'facial-login' %}">
+				Access Admin's Page
+			</a>
+
+			<small class="text-muted ml-2">
+				<a href="{% url 'password_reset' %}">
+					Forgot Password?
+				</a>
+			</small>
+		</div>
+	</form>
+
+	<div class="border-top pt-3">
+		<small class="text-muted">
+			Need An Account?
+			<a class="ml-2" href="{% url 'register' %}">
+				Sign Up Now
+			</a>
+		</small>
+	</div>
+</div>
+{% endblock blog_content %}
+
+<!-- 36 -->

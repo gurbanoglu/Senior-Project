@@ -1,0 +1,10 @@
+*.pyc
+__pycache__/
+
+node_modules
+
+# The trailing slash ensures that Git ignores
+# the entire directory and its content.
+venv/
+
+db.sqlite3

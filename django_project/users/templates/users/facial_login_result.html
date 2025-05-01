@@ -1,0 +1,160 @@
+{% load static %}
+
+<!-- This HTML template will display the appropriate material
+		 considering what the result of the facial login was.
+		 That is, there are three possible cases of the facial
+		 login result:
+
+     1. The face in the captured image matched one of the
+		    facial images in the "django_project/media/facial_images"
+			  directory.
+     2. The face in the captured image did not match any of
+		    the facial images in the "django_project/media/facial_images"
+			  directory.
+     3. There was no face detected in the image that was captured. -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet"
+		href="{% static 'styles/hover-button.css' %}"
+		type="text/css" />
+
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			margin: 0;
+			font-family: Arial;
+		}
+
+		#facial-login-result-video-background {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+		}
+
+		.content {
+			position: absolute;
+			background: rgb(0, 0, 0);
+			background: rgba(0, 0, 0, 0.5);
+			color: #f1f1f1;
+			width: 800px;
+			padding: 20px;
+			border-radius: 30px;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<video autoplay muted loop id="facial-login-result-video-background">
+			<source
+				src="{% static 'video-backgrounds/chiesa-di-san-pietro.mp4' %}"
+				type="video/mp4">
+		</video>
+	</div>
+
+	<div class="text">
+		<center>
+			<h1 style="color: white;">
+				Facial Image Verification Result
+			</h1>
+		</center>
+
+		<!-- If 'facialImageMatchedOnce' is equal to true. -->
+		{% if facialImageMatchedAtleastOnce %}
+
+		<div class="content">
+			<center>
+				<p style="color: white; font-size: 1.5em; font-weight: bold;">
+					The facial image you submitted matched at least
+					one of <br> the images that was set by an
+					administrative user. <br><br>
+					You can now proceed to access the administrator's
+					<br> page by entering the following credentials:
+					<br><br>
+					<u>Username</u>: gurbanoglu
+					<u>Password</u>: Albert1933!@
+				</p>
+
+				<button class="button"
+					onclick="window.open(g_adminPage, '_blank');
+					return false;">
+					Proceed To Admin's Page
+				</button>
+
+				<button class="button button2"
+					onclick=location.href="{% url 'login' %}">
+					Go To the Login Page
+				</button>
+			</center>
+		</div>
+
+		{% elif faceNotDetectedInDownloadedImage %}
+
+		<div class="content">
+			<center>
+				<p style="color: white; font-size: 1.5em; font-weight: bold;">
+					A face was not detected in the image that you
+					captured from the camera. <br> You can either
+					capture a new facial image, or go to the Login
+					page.
+				</p>
+
+				<button class="button"
+					onclick=location.href="{% url 'facial-login' %}">
+					Capture A New Facial Image
+				</button>
+
+				<button class="button button2"
+					onclick=location.href="{% url 'login' %}">
+					Go To The Login Page
+				</button>
+			</center>
+		</div>
+
+		{% else %}
+
+		<div class="content">
+			<center>
+				<p style="color: white; font-size: 1.5em; font-weight: bold">
+					The facial image you submitted did not match
+					any of the facial images that have been set
+					by the administrative users. You can either
+					capture a new facial image, or go to the
+					Login page.
+				</p>
+
+				<button class="button"
+					onclick=location.href="{% url 'facial-login' %}">
+					Capture A New Facial Image
+				</button>
+
+				<button class="button button2"
+					onclick=location.href="{% url 'view-menu' %}">
+					View Menu
+				</button>
+
+				<button class="button button3"
+					onclick=location.href="/">
+					Go To Home
+				</a>
+			</center>
+		</div>
+
+		{% endif %}
+	</div>
+	<script>
+		let g_adminPage = "{% url 'admin:index' %}";
+	</script>
+</body>
+</html>
+
+<!-- 71 -->

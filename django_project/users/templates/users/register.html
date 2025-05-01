@@ -1,0 +1,50 @@
+{% extends "blog/base.html" %}
+
+{% load crispy_forms_tags %}
+
+<!-- A POST request is made here, so that
+     the user can send their data to the
+		 server to register a new account. -->
+{% block blog_content %}
+<head>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" 
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+		crossorigin="anonymous">
+	</script>
+</head>
+
+<div class="content-section">
+	<form method="POST">
+		{% csrf_token %}
+		<fieldset class="form-group">
+			<legend class="border-bottom mb-4">
+				Join Today
+			</legend>
+
+			{{ form|crispy }}
+		</fieldset>
+
+		<div class="form-group">
+			<button class="btn btn-outline-info"
+				type="submit">
+				Sign Up
+			</button>
+		</div>
+	</form>
+
+	<div class="border-top pt-3">
+		<small class="text-muted">
+			<!-- Below shows that 'login' will be
+			     part of the URL for the login page. -->
+			Already Have An Account?
+
+			<a class="ml-2"
+				href="{% url 'login' %}">
+				Sign In
+			</a>
+		</small>
+	</div>
+</div>
+{% endblock blog_content %}
+
+<!-- 28 -->

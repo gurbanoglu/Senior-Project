@@ -1,0 +1,8 @@
+{
+    "SECRET_KEY": "django-insecure-n_=%7q&8r7fx6b$783qwwf%el-%a^122%dw&5_@gkh+6b9czg2",
+    "EMAIL_USER": "dennisgurban44@gmail.com",
+    "EMAIL_PASS": "lhsdpdzcqvexaodz",
+    "AWS_ACCESS_KEY_ID": "AKIAQPCFAYKN6LRAEH6K",
+    "AWS_SECRET_ACCESS_KEY": "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",
+    "AWS_STORAGE_BUCKET_NAME": "deniz-bucket"
+}

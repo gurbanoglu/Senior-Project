@@ -1,0 +1,82 @@
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0" />
+
+	<title>Weather App</title>
+
+	<meta name="description" content="description" />
+	<meta name="author" content="author" />
+	<meta name="keywords" content="keywords" />
+
+	<link rel="stylesheet"
+		href="{% static 'styles/weather-style.css' %}"
+		type="text/css" />
+
+	<link rel="stylesheet"
+		href="{% static 'styles/navigation-bar.css' %}"
+		type="text/css" />
+</head>
+
+<body>
+	<div class="navbar">
+		<a href="/">Home Page</a>
+
+		<a href="{% url 'view-menu' %}">
+			View Menu
+		</a>
+	</div>
+
+	<br>
+
+	<div class="container">
+		<form method='POST'>
+			{% csrf_token %}
+			<input type="text" name="city"
+				placeholder="Enter City">
+
+			<button type="submit" class="btn">
+				Enter
+			</button>
+		</form>
+
+		<div class="weather">
+			<div class="left">
+				<h2>
+					Temperature: {{ temp }} &degF
+				</h2>
+
+				<h3>
+					Location: {{ city }}
+				</h3>
+			</div>
+
+			<div class="right">
+				<div class="icon">
+					<p>
+						<img src='http://openweathermap.org/img/w/{{ icon }}.png'
+							width="100px" />
+					</p>
+				</div>
+
+				<div class="condition">
+					<p>
+						{{ description }}
+					</p>
+
+					<p>
+						{{ day }}
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+<!-- 37 -->

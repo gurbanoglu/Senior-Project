@@ -1,0 +1,35 @@
+{% load static %}
+{% load embed_video_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet"
+		href="{% static 'styles/city-details.css' %}"
+		type="text/css"/>
+</head>
+<body>
+
+<br>
+
+<h1 align="center" class="mb-5">
+	İstanbul Travel Videos
+</h1>
+
+<div class="video-content">
+	{% for item in videos %}
+		<div class="px-3 mb-5">
+			<div class="individual-video">
+				{% video item.m_url '426x240' %}
+
+				<div class="d-flex justify-content-start">
+					{{ item.m_title }}
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+</div>
+
+</body>
+</html>
+
+<!-- 25 -->

@@ -1,0 +1,129 @@
+{% extends "blog/base.html" %}
+
+{% load crispy_forms_tags %}
+
+<!-- The username, email, profile image, and
+     facial image for each profile are styled
+		 in this template.
+
+     The buttons for updating a user's
+		 credentials along with their facial
+		 login image are also declared in
+		 this template. -->
+{% block blog_content %}
+<style>
+	.asteriskField {
+		display: none;
+	}
+
+	.facial-login-container {
+		position: relative;
+		bottom: 900px;
+		left: 450px;
+	}
+
+	.position-facial-image {
+		text-indent: 25px;
+	}
+
+	.position-name-and-email {
+		position: relative;
+		right: 180px;
+		top: 190px;
+	}
+
+	a.CaptureFacialImage:link,
+	a.CaptureFacialImage:visited {
+		background-color: #f44336;
+		color: white;
+		padding: 14px 25px;
+		text-align: center;
+		text-decoration: none;
+		border-radius: 50px;
+		position: relative;
+		right: 193px;
+		top: 70px;
+	}
+
+	a.CaptureFacialImage:hover,
+	a.CaptireFacialImage:active {
+		background-color: red;
+	}
+</style>
+<div class="content-section">
+	<div class="media">
+		<img class="rounded-circle account-img"
+			src="{{ user.profile.m_Profile_Image.url }}">
+
+		<div class="position-name-and-email">
+			<div class="media-body">
+				<h2 class="account-heading">
+					{{ user.username }}
+				</h2>
+
+				<p class="text-secondary">
+					{{ user.email }}
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- "enctype" is an encoding type for the form.
+	 		 This is necessary, so that the form can pass
+			 image data for the profile picture properly
+			 by saving the image in the background. -->
+	<form method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+
+		<fieldset class="form-group">
+			<legend class="border-bottom mb-4">
+				Profile Info
+			</legend>
+
+			<!-- "u_form" was created inside the
+			     "users -> views.py" file. -->
+			{{ u_form|crispy }}
+
+			{{ p_form|crispy }}
+		</fieldset>
+
+		<div class="form-group">
+			<button class="btn btn-outline-info"
+				type="submit">
+				Update
+			</button>
+		</div>
+	</form>
+</div>
+
+<!-- This div element was put outside of the
+     "content-section" div element because it
+		 had to be set to a "relative" position
+     where a long username entry wouldn't cause
+		 it to move rightwards.
+
+     This div element could not be set to a
+		 position of "absolute" because then it
+		 would move upon the "Update" button being
+     clicked. -->
+<div class="facial-login-container">
+	<u>
+		<b style="font-size: 1.2em;">
+			Current Facial Login Image
+		</b>
+	</u>
+
+	<div class="position-facial-image">
+		<img class="rounded account-img"
+			src="{{ user.profile.m_Facial_Image.url }}">
+
+		<a class="CaptureFacialImage"
+			href="{% url 'capture-facial-image' %}"
+			target="_blank">
+			Capture Facial Image
+		</a>
+	</div>
+</div>
+{% endblock blog_content %}
+
+<!-- 77 -->

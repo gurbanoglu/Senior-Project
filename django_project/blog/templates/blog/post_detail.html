@@ -1,0 +1,58 @@
+<!-- Extend the base template within the "blog"
+ 		 directory. -->
+{% extends "blog/base.html" %}
+
+<!-- In here, if the logged-in user is equal to the
+ 		 author of a post, I am giving them the option
+		 to update or delete their posts. -->
+
+{% block blog_content %}
+<article class="media content-section">
+	<!-- Add the URL of the image associated with the
+			 profile of the author of the  current object. -->
+	<!-- Add a bootstrap class to display the image
+			 in a circle. -->
+	<img class="rounded-circle article-img" 
+		src="{{ object.m_author.profile.m_Profile_Image.url }}">
+
+	<div class="media-body">
+		<div class="article-metadata">
+			<a class="mr-2"
+				href="{% url 'user-posts' object.m_author.username %}">
+				{{ object.m_author }}
+			</a>
+
+			<small class="text-muted">
+				{{ object.m_datePosted|date:"F d, Y" }}
+			</small>
+
+			<!-- If the author is the current logged in user,
+					 display the links to update and delete. -->
+			{% if object.m_author == user %}
+				<!-- I put the update and delete buttons into a <div>
+						 block, so that they would appear on a new line
+						 underneath the profile username of each post. -->
+				<div>
+					<!-- Display a URL to the 'post-update' route. It
+							 is necessary to specify which object is being
+							 updated which is "object.id". -->
+					<!-- "btn" is a bootstrap button. "btn-sm" is a small
+							 bootstrap button. "mt-1" is a margin top of one.
+							 "mb-1" is a margin bottom of one. -->
+					<a class="btn btn-secondary btn-sm mt-1 mb-1" 
+						href="{% url 'post-update' object.id %}">Update</a>
+					
+					<!-- Use "btn-danger" because it is a delete button. -->
+					<a class="btn btn-danger btn-sm mt-1 mb-1" 
+						href="{% url 'post-delete' object.id %}">Delete</a>
+				</div>
+			{% endif %}
+		</div>
+
+		<h2 class="article-title">{{ object.m_title }}</h2>
+		<p class="article-content">{{ object.m_content }}</p>
+	</div>
+</article>
+{% endblock blog_content %}
+
+<!-- 26 -->

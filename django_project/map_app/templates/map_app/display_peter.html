@@ -1,0 +1,159 @@
+{% load static %}
+{% load embed_video_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet"
+		href="{% static 'styles/city.css' %}" type="text/css"/>
+</head>
+<body>
+	<div class="container">
+		<img
+			src="{% static '/images/palace-square-entrance.jpg' %}"
+			alt="Palace Square Entrance"/>
+
+		<div class="content">
+			<br><br>
+
+			<h1
+				style="font-size: 2em; color: powderblue">
+				Saint Petersburg
+			</h1>
+
+			<br>
+
+			<u>
+				<b>City Attractions</b>
+			</u>
+
+			<li>
+				<a href="{% url 'dvortsovaya-ploshchad' %}">
+					Palace Square
+				</a>
+			</li>
+
+			<li>
+				<a href="{% url 'hermitage-museum' %}">
+					Hermitage Museum
+				</a>
+			</li>
+
+			<li>
+				<a href="{% url 'church-of-the-saviour-on-blood' %}">
+					Church of the Saviour on Blood
+				</a>
+			</li>
+
+			<br><br>
+
+			<b>
+				<a class="videos"
+					href="{% url 'saint-petersburg-videos' %}">
+					Travel Videos
+				</a>
+			</b>
+
+			<br><br>
+
+			<b>
+				<a class="videos"
+					href="{% url 'saint-petersburg-history' %}">
+					History of Saint Petersburg
+				</a>
+			</b>
+
+			<br><br>
+
+			<u>
+				<b>Hotel Cost</b>
+			</u>
+
+			<li>
+				Five Star Average: $349 per night
+			</li>
+
+			<li>
+				Three Star Average: $80 per night
+			</li>
+
+			<li>
+				<a
+					href="https://www.tripadvisor.com/Hotels-g298507-zfc5-St_Petersburg_Northwestern_District-Hotels.html"
+					target="_blank">
+					5-Star Hotels in Saint Petersburg
+				</a>
+			</li>
+
+			<li>
+				<a
+					href="https://www.booking.com/threestars/city/ru/saint-petersburg.html"
+					target="_blank">
+					3-Star Hotels in Saint Petersburg
+				</a>
+			</li>
+
+			<br>
+
+			<u>
+				<b>Average Daily Dining Cost</b>
+			</u>
+
+			<li>
+				Per Person: $24
+			</li>
+			
+			<br>
+
+			<li>
+				Tip Percentage: 7-10%
+			</li>
+
+			<br>
+
+			<u>
+				<b>Average Daily Expenditure</b>
+			</u>
+
+			<li>Per Person: $83</li>
+
+			<br>
+			
+			<b>
+				<a class="videos"
+					href="{% url 'saint-petersburg-english-and-transportation' %}">
+					English Proficiency & Transportation
+				</a>
+			</b>
+
+			<br><br>
+			
+			<b>
+				<a class="videos"
+					href="{% url 'saint-petersburg-details' %}">
+				Important Details
+				</a>
+			</b>
+			
+			<br><br>
+			
+			<u>
+				<b>Hottest Month</b>
+			</u>
+
+			<li>July (Average High: 73°F)</li>
+
+			<br>
+
+			<u>
+				<b>Coldest Month</b>
+			</u>
+
+			<li>
+				February (Average Low: 15°F)
+			</li>
+		</div>
+	</div>
+</body>
+</html>
+
+<!-- 50 -->
