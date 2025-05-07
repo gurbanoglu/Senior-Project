@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # Copy requirements first (leverages Docker layer caching)
-COPY ./django_project/requirements.txt .
+COPY requirements.txt .
 
 # Upgrade pip and install Python dependencies
 RUN pip install --upgrade pip \
