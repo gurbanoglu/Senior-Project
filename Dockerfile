@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
 # Set working directory
 WORKDIR /app
 
-# Copy requirements first (leverages Docker layer caching)
+# Copy requirements.txt (now in the root of the repo)
 COPY requirements.txt .
 
 # Upgrade pip and install Python dependencies
@@ -30,4 +30,4 @@ COPY . .
 EXPOSE 8000
 
 # Run the development server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "django_project/manage.py", "runserver", "0.0.0.0:8000"]

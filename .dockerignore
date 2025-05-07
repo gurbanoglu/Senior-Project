@@ -1,0 +1,7 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+django_project/venv/
+.git/
+django_project/db.sqlite3
