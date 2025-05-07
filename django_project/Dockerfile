@@ -10,8 +10,9 @@ RUN apt-get update && apt-get install -y \
     pkg-config \
     libopenblas-dev \
     liblapack-dev \
+    libgtk-3-dev \
     libx11-dev \
- && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
 WORKDIR /app

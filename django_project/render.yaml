@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: django_project
+    env: docker
+    dockerImage: gurbanoglu/django_project:latest
+    plan: free
+    branch: main
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: django_project.settings
+      - key: SECRET_KEY
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: EMAIL_USER
+        value: dennisgurban44@gmail.com
+      - key: EMAIL_PASS
+        value: Tatiana1939!@
