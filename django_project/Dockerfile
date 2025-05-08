@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
-WORKDIR /django_project
+WORKDIR /
 
 # Copy requirements.txt (now in the root of the repo)
 COPY requirements.txt .
