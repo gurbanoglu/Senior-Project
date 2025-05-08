@@ -25,7 +25,7 @@ COPY . .
 ENV PYTHONPATH=/app/django_project
 
 # Set environment variable for Django settings
-ENV DJANGO_SETTINGS_MODULE=django_project.django_project.settings
+ENV DJANGO_SETTINGS_MODULE=django_project.settings
 
 # Expose port 8000
 EXPOSE 8000
