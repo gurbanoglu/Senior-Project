@@ -6,15 +6,14 @@ services:
     plan: free
     branch: main
     region: oregon
-    dockerfilePath: ./Dockerfile
     envVars:
       - key: DJANGO_SETTINGS_MODULE
-        value: django_project.settings
+        value: django_project.django_project.settings
       - key: SECRET_KEY
         sync: false
       - key: DATABASE_URL
         sync: false
       - key: EMAIL_USER
-        value: dennisgurban44@gmail.com
+        sync: false
       - key: EMAIL_PASS
-        value: Tatiana1939!@
+        sync: false

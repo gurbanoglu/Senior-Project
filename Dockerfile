@@ -1,10 +1,14 @@
-# Use official Python image
+# Use official slim Python base image
 FROM python:3.10-slim
 
-# Set working directory
-WORKDIR /app/django_project
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 
-# Install OS-level dependencies needed for dlib
+# Set working directory to the project root
+WORKDIR /app
+
+# Install system dependencies needed for dlib and other native packages
 RUN apt-get update && apt-get install -y \
     build-essential cmake libopenblas-dev liblapack-dev \
     libx11-dev libgtk-3-dev libboost-all-dev curl && \
@@ -14,14 +18,14 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
-# Copy Django project files (everything from root into /app)
+# Copy entire project into container
 COPY . .
 
-# Set environment variable if needed
+# Set environment variable for Django settings
 ENV DJANGO_SETTINGS_MODULE=django_project.django_project.settings
 
-# Expose the port
+# Expose port 8000
 EXPOSE 8000
 
-# Run the app using gunicorn
-CMD ["gunicorn", "django_project.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Run the app using Gunicorn with the correct module path
+CMD ["gunicorn", "django_project.django_project.wsgi:application", "--bind", "0.0.0.0:8000"]
