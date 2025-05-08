@@ -21,6 +21,9 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 # Copy entire project into container
 COPY . .
 
+# Set PYTHONPATH so Python can locate your Django apps (like 'blog')
+ENV PYTHONPATH=/app/django_project
+
 # Set environment variable for Django settings
 ENV DJANGO_SETTINGS_MODULE=django_project.django_project.settings
 
@@ -28,4 +31,4 @@ ENV DJANGO_SETTINGS_MODULE=django_project.django_project.settings
 EXPOSE 8000
 
 # Run the app using Gunicorn with the correct module path
-CMD ["gunicorn", "django_project.django_project.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "django_project.wsgi:application", "--bind", "0.0.0.0:8000"]
