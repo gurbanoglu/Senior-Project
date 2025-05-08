@@ -2,7 +2,7 @@
 FROM python:3.10-slim
 
 # Set working directory
-WORKDIR /app
+WORKDIR /app/django_project
 
 # Install OS-level dependencies needed for dlib
 RUN apt-get update && apt-get install -y \
@@ -24,4 +24,4 @@ ENV DJANGO_SETTINGS_MODULE=django_project.django_project.settings
 EXPOSE 8000
 
 # Run the app using gunicorn
-CMD ["gunicorn", "django_project.django_project.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "django_project.wsgi:application", "--bind", "0.0.0.0:8000"]
