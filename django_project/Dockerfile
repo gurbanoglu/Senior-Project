@@ -1,4 +1,5 @@
-FROM python:3.10
+# Use an official Python base image
+FROM python:3.11-slim
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -15,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
-WORKDIR /app
+WORKDIR /app/django_project
 
 # Copy requirements.txt (now in the root of the repo)
 COPY requirements.txt .
