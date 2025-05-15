@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 # Importing "Image" aides in resizing images.
 from PIL import Image
 
+# DEFAULT_PROFILE_IMAGE_URL = 'https://res.cloudinary.com/dybmcxawv/image/upload/v1747033011/profile_images/default_profile_image.png'
+
 # Creating a new model and inheriting
 # from 'models.Model'.
 
@@ -11,29 +13,43 @@ from PIL import Image
 class Profile(models.Model):
 	'''
 	I passed "User" as the argument below
-  because there needs to be a one-to-one
-  relationship with the User model.
+	because there needs to be a one-to-one
+	relationship with the User model.
 	"CASCADE" indicates that if the user is
-  deleted, then delete the profile, but if
-  the profile is deleted, the user won't
-  be deleted.'''
+	deleted, then delete the profile, but if
+	the profile is deleted, the user won't
+	be deleted.'''
 
 	m_user = models.OneToOneField(
-		User, on_delete=models.CASCADE,
-		verbose_name="User")
+		User,
+		on_delete=models.CASCADE,
+		verbose_name="User"
+	)
 
-	# 'profile_pics' will be the directory
+	# 'profile_images' will be the directory
 	# where images get saved when a profile
 	# image is uploaded.
 	m_Profile_Image = models.ImageField(
-		default='DefaultProfileImage.jpg',
-		upload_to='profile_pics',
-		verbose_name="Profile Image")
+    upload_to='profile_images/',
+    verbose_name="Profile Image"
+	)
+
+	m_Profile_Image_URL = models.URLField(
+		default='https://res.cloudinary.com/dybmcxawv/image/upload/v1747033011/profile_images/default_profile_image.png',
+		max_length=500,
+		verbose_name='Profile Image URL'
+	)
 
 	m_Facial_Image = models.ImageField(
-		default='DefaultFacialImage.jpg',
-		upload_to='facial_images',
-		verbose_name="Facial Image")
+		upload_to='facial_images/',
+    verbose_name="Facial Image"
+	)
+
+	m_Facial_Image_URL = models.URLField(
+		default='https://res.cloudinary.com/dybmcxawv/image/upload/v1747068277/facial_images/default_facial_image.jpg',
+		max_length=500,
+		verbose_name='Facial Image URL'
+	)
 
 	# Anytime a profile is displayed, show
 	# the username followed by "Profile".
@@ -53,31 +69,47 @@ class Profile(models.Model):
 	The following section is commented out
 	so that images will not be automatically
 	resized.'''
-	# def save(self, *args, **kwargs):
-	#			'''
-	#     This will execute the "save()" method of
-	# 		the parent class. The save() method must
-	# 		accept arguments that the parent class
-	#     might be expecting. 'args' is for positional
-	# 		arguments and 'kwargs' is for keyword arguments.'''
-	#     super().save(*args, **kwargs)
+	def save(self, *args, **kwargs):
+		if self.m_Profile_Image:
+			try:
+				self.m_Profile_Image_URL = self.m_Profile_Image.url
+			except ValueError:
+				# Handle case where image is not
+				# yet uploaded or invalid.
+				pass
 
-	#     # Grab the image that was saved by opening
-	# 		# the image of the current instance.
-	#     img = Image.open(self.image.path)
+		if self.m_Facial_Image:
+			try:
+				self.m_Facial_Image_URL = self.m_Facial_Image.url
+			except ValueError:
+				# Handle case where image is not
+				# yet uploaded or invalid.
+				pass
 
-	#     # If the height or the width of an image is
-	# 		# greater than 300 pixels, then it will be
-	# 		# resized.
-	#     if img.height > 300 or img.width > 300:
-	#					# Tuple of the max image sizes.
-	#         output_size = (300, 300)
-	#					
-	#					# This will resize the image.
-	#         img.thumbnail(output_size)
-	#
-	#         # Save the image back to the same path
-	# 				# to overwrite the larger image.
-	#         img.save(self.image.path)
+		'''
+	  This will execute the "save()" method of
+	 	the parent class. The save() method must
+		accept arguments that the parent class
+	  might be expecting. 'args' is for positional
+		arguments and 'kwargs' is for keyword arguments.'''
+		super().save(*args, **kwargs)
+
+	  # Grab the image that was saved by opening
+		# the image of the current instance.
+		# img = Image.open(self.image.path)
+
+	  # If the height or the width of an image is
+		# greater than 300 pixels, then it will be
+		# resized.
+		# if img.height > 300 or img.width > 300:
+			# Tuple of the max image sizes.
+			# output_size = (300, 300)
+
+			# This will resize the image.
+			# img.thumbnail(output_size)
+
+	    # Save the image back to the same path
+			# to overwrite the larger image.
+			# img.save(self.image.path)
 
 # 22

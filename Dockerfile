@@ -3,12 +3,14 @@ FROM python:3.10-slim
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    DJANGO_SETTINGS_MODULE=django_project.settings \
+    PYTHONPATH=/app/django_project
 
-# Set working directory to the project root
+# Set working directory
 WORKDIR /app
 
-# Install system dependencies needed for dlib and other native packages
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     build-essential cmake libopenblas-dev liblapack-dev \
     libx11-dev libgtk-3-dev libboost-all-dev curl && \
@@ -18,17 +20,18 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
-# Copy entire project into container
-COPY . .
+# Copy entire project
+COPY . /app
 
-# Set PYTHONPATH so Python can locate your Django apps (like 'blog')
-ENV PYTHONPATH=/app/django_project
+# Copy entrypoint script and make it executable
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-# Set environment variable for Django settings
-ENV DJANGO_SETTINGS_MODULE=django_project.settings
+# Set working directory for Django
+WORKDIR /app/django_project
 
-# Expose port 8000
+# Expose the application port
 EXPOSE 8000
 
-# Run the app using Gunicorn with the correct module path
-CMD ["gunicorn", "django_project.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Set the container's entrypoint
+ENTRYPOINT ["/entrypoint.sh"]

@@ -133,17 +133,22 @@ h2 {
 		 web apps. -->
 <!-- Required meta tags -->
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
 
 <!-- This indicates that the link is a
 		 stylesheet with a type that is CSS. -->
 <!-- href will indicate where the CSS file is located. -->
-<link rel="stylesheet" type="text/css" href="{% static 'blog/navigation_bar.css' %}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css"
+	href="{% static 'blog/navigation-bar.css' %}">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock %}
 
 {% block content %}
@@ -161,7 +166,8 @@ h2 {
 	<!-- A navigation bar is included
 			 with bootstrap CSS classes. -->
 	<nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-		<button class="btn" style="font-size: 1.3rem;" onclick="window.location.href='/';">
+		<button class="btn" style="font-size: 1.3rem;"
+			onclick="window.location.href='/';">
 			<i class="fa fa-home"></i> Home
 		</button>
 
@@ -171,8 +177,10 @@ h2 {
 				Offical Django Website
 			</a>
 
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
-					aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button"
+				data-toggle="collapse" data-target="#navbarToggle"
+				aria-controls="navbarToggle" aria-expanded="false"
+				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 
@@ -236,7 +244,7 @@ h2 {
 			{% if messages %}
 			{% for message in messages %}
 			<div class="alert alert-{{ message.tags }}">
-					{{ message }}
+				{{ message }}
 			</div>
 			{% endfor %}
 			{% endif %}
@@ -247,50 +255,57 @@ h2 {
 			<div id="scroll-container">
 				<div id="scroll-text">
 					<div class="time-container">
-						<h2>Pago Pago <br>
-								American Samoa 🇦🇸
+						<h2>
+							Pago Pago <br>
+							American Samoa 🇦🇸
 						</h2>
 						<div id="rootSamoa" class="time-display"></div><br>
 					</div>
 
 					<div class="time-container">
-						<h2>New York <br>
-								United States 🇺🇸
+						<h2>
+							New York <br>
+							United States 🇺🇸
 						</h2>
 						<div id="rootNewYork" class="time-display"></div><br>
 					</div>
 
 					<div class="time-container">
-						<h2>Vienna <br>
-								Austria 🇦🇹
+						<h2>
+							Vienna <br>
+							Austria 🇦🇹
 						</h2>
 						<div id="rootVienna" class="time-display"></div><br>
 					</div>
 
 					<div class="time-container">
-						<h2>Addis Ababa <br>
-								Ethiopia 🇪🇹
+						<h2>
+							Addis Ababa <br>
+							Ethiopia 🇪🇹
 						</h2>
 						<div id="rootAddisAbaba" class="time-display"></div><br>
 					</div>
 
 					<div class="time-container">
-						<h2>Baku <br>
-								Azerbaijan 🇦🇿
+						<h2>
+							Baku <br>
+							Azerbaijan 🇦🇿
 						</h2>
 						<div id="rootBaku" class="time-display"></div><br>
 					</div>
 
 					<div class="time-container">
-						<h2>Bangkok <br>
-								Thailand 🇹🇭
+						<h2>
+							Bangkok <br>
+							Thailand 🇹🇭
 						</h2>
 						<div id="rootBangkok" class="time-display"></div><br>
 					</div>
 
 					<div class="time-container">
-						<h2>Tarawa <br>
-								Kiribati 🇰🇮
+						<h2>
+							Tarawa <br>
+							Kiribati 🇰🇮
 						</h2>
 						<div id="rootTarawa" class="time-display"></div><br>
 					</div>
@@ -318,8 +333,15 @@ h2 {
 <script>
 	const g_TimeDisplay = document.getElementsByClassName('time-display');
 
-	const g_TimeZones = ["Pacific/Samoa", "America/New_York", "Europe/Vienna",
-			"Africa/Addis_Ababa", "Asia/Baku", "Asia/Bangkok", "Pacific/Tarawa"]
+	const g_TimeZones = [
+		"Pacific/Samoa",
+		"America/New_York",
+		"Europe/Vienna",
+		"Africa/Addis_Ababa",
+		"Asia/Baku",
+		"Asia/Bangkok",
+		"Pacific/Tarawa"
+	]
 
 	for (let i = 0; i < g_TimeDisplay.length; i++) {
 		setInterval(function Tick() {

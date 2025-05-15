@@ -1,51 +1,51 @@
 [
     {
-        "title": "What are the advanages of beginning with front-end?",
+        "title": "What are the advantages of beginning with front-end?",
         "content": "Vivamus magna velit, elementum at dolor eget, sodales blandit justo. Nam sed justo consequat nunc vulputate aliquam et in nulla. Nulla blandit vel sapien in accumsan. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer eu ligula varius, mollis elit in, sagittis leo. Integer pharetra velit sed molestie gravida. Phasellus molestie sapien vel odio viverra commodo.", 
         "user_id": 1
-    }, 
-    
+    },
+
     {
         "title": "How is Django different than other web frameworks?", 
         "content": "Sed fermentum ac erat vel rutrum. In enim orci, rutrum quis facilisis quis, suscipit in massa. Etiam non lorem quam. Quisque blandit neque sed porta varius. Suspendisse ut augue pellentesque, congue odio eleifend, sagittis justo. Nunc blandit mollis gravida. Morbi finibus nisl eu libero egestas ultricies. Ut vel neque hendrerit magna interdum auctor at vitae mauris. Nunc at volutpat lacus. Morbi nec vestibulum felis. Proin aliquam a mi sed varius. Duis finibus, neque id eleifend porta, dolor velit semper ipsum, vitae porta tellus arcu ac lectus. Morbi varius, enim at faucibus tincidunt, purus augue maximus magna, vel egestas nunc dolor sed felis. Ut tempor mi vel mi molestie venenatis. Fusce metus orci, viverra at consectetur a, tempor vitae libero.",
-        "user_id": 2
-    }, 
+        "user_id": 1
+    },
 
     {
         "title": "Coffee can hurt programmers' performance.", 
         "content": "Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean fringilla vulputate turpis vel dignissim. Proin tincidunt libero vel erat vulputate, et ornare ante commodo. Pellentesque justo ligula, cursus id augue consectetur, commodo lobortis nisi. Nam sollicitudin gravida felis. Sed vestibulum dolor at mi efficitur, quis blandit enim volutpat. Nam mauris metus, mattis nec odio quis, vehicula bibendum turpis. Nunc non accumsan est, et hendrerit diam. Fusce tristique interdum lorem vitae suscipit. Aliquam tristique nec magna at consequat. Curabitur vitae faucibus tortor. Donec ullamcorper mattis neque et porta.", 
         "user_id": 1
-    }, 
+    },
         
     {
         "title": "Looking For An Entry-Level Position Without A Degree?", 
         "content": "Nulla ut nisi ex. Curabitur purus magna, dapibus a diam eu, eleifend cursus enim. Nullam sollicitudin sollicitudin vehicula. Nulla molestie dignissim feugiat. Nulla vulputate diam a felis viverra iaculis. Morbi lorem nunc, posuere non placerat in, finibus ut nisi. Proin arcu ipsum, aliquam quis mollis non, imperdiet quis quam.", 
         "user_id": 1
-    }, 
+    },
     
     {
         "title": "Coding Is Contributing To Environmental Conservation", 
         "content": "Donec id viverra velit, id mollis ex. Suspendisse tempor feugiat odio, ac suscipit quam congue non. Nam elementum dolor aliquam pharetra aliquam. Donec sit amet condimentum libero, sed pellentesque sapien. Curabitur eget nunc in mauris porta tincidunt. Nam nec massa semper, pretium libero sed, vulputate magna. Integer elementum interdum elit vel bibendum.",
         "user_id": 1
-    }, 
+    },
     
     {
         "title": "Python vs. Java Performance?", 
         "content": "Aliquam ac sodales lacus. Duis facilisis est magna, nec tempor sapien hendrerit at. Aliquam rutrum tortor velit, eu vehicula risus vehicula et. Suspendisse vel pellentesque nisi. Etiam lectus lorem, condimentum sed lacinia eget, placerat vitae turpis. Nullam vel libero nisl. Aenean non nisl ac quam sagittis mattis.",
-        "user_id": 2
-    }, 
+        "user_id": 1
+    },
 
     {
         "title": "A World Immersed In Artificial Intelligence",
         "content": "Suspendisse luctus elementum augue. Maecenas varius mattis lectus, ut posuere tellus consectetur sed. Sed a elit nibh. Cras enim tortor, dignissim et maximus eget, varius quis eros. Quisque eu ex eget dui vestibulum suscipit. Aliquam imperdiet pharetra libero, sed malesuada est. Phasellus interdum leo varius justo sodales, in dapibus velit posuere. Aliquam ut sem sed magna efficitur hendrerit vel eu turpis. Nam massa magna, ultrices ac risus a, pellentesque sollicitudin lorem.",
-        "user_id": 2
+        "user_id": 1
     },
 
     {
         "title": "Drone Deliveries Providing Medical Supplies To Remote Villages",
         "content": "Praesent pharetra enim tellus, ut vestibulum mauris scelerisque eu. Duis faucibus consectetur eros, id congue dolor ornare sit amet. Proin et tristique nisl, non tempus dui. Suspendisse vitae dapibus quam, in lobortis lorem. Curabitur sagittis faucibus feugiat. Curabitur hendrerit scelerisque sollicitudin. Pellentesque quis turpis justo. Donec erat eros, rhoncus quis nisi quis, faucibus pellentesque arcu.",
         "user_id": 1
-    }, 
+    },
         
     {
         "title": "Common Poorly Written Coding Practices",

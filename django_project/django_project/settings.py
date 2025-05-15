@@ -17,6 +17,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import cloudinary
+import cloudinary.uploader
+from dotenv import load_dotenv
+load_dotenv()
 # import json
 
 # with open('/etc/config.json') as config_file:
@@ -26,6 +30,11 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+CLOUDINARY_STORAGE = {
+	'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+	'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+	'API_SECRET': os.getenv('CLOUDINARY_API_SECRET')
+}
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -75,10 +84,15 @@ INSTALLED_APPS = [
 	'ExamQuestions.apps.ExamQuestionsConfig',
 	'ExamResults.apps.ExamResultsConfig',
 	'base',
-	'embed_video'
+	'embed_video',
+  'cloudinary',
+  'cloudinary_storage'
 ]
 
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 MIDDLEWARE = [
+  'whitenoise.middleware.WhiteNoiseMiddleware',
 	'django.middleware.security.SecurityMiddleware',
 	'django.contrib.sessions.middleware.SessionMiddleware',
 	'django.middleware.common.CommonMiddleware',
@@ -159,6 +173,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Specify the directory where static files will be collected
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 # Configure the Django project, so that it
 # read the 'static' folder inside the first
 # "django_project" directory.
@@ -166,6 +183,8 @@ STATICFILES_DIRS = [
 	BASE_DIR / 'static',
 	# BASE_DIR / 'Exam' / 'static'
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # "MEDIA_ROOT" is the directory where the uploaded
 # files will be saved and uploaded on the file

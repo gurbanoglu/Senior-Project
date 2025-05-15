@@ -1,0 +1,176 @@
+/* This CSS file designs the styling for
+   the history timeline that is available
+   to be viewed for each city. */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #20B2AA;
+  font-family: Helvetica, sans-serif;
+}
+
+.timeline {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  background-color: white;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -3px;
+}
+
+.container {
+  padding: 10px 40px;
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+}
+
+.container::after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  right: -17px;
+  background-color: white;
+  border: 4px solid blue;
+  top: 15px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  left: 50%;
+}
+
+.left::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  right: 30px;
+  border: medium solid white;
+  border-width: 10px 0 10px 10px;
+  border-color: transparent transparent transparent white;
+}
+
+.right::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  left: 30px;
+  border: medium solid white;
+  border-width: 10px 10px 10px 0;
+  border-color: transparent white transparent transparent;
+}
+
+.right::after {
+  left: -16px;
+}
+
+.content {
+  padding: 20px 30px;
+  background-color: white;
+  position: relative;
+  border-radius: 6px;
+}
+
+@media screen and (max-width: 600px) 
+{
+  .timeline::after {
+    left: 31px;
+  }
+  
+  .container {
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 25px;
+  }
+  
+  .container::before {
+    left: 60px;
+    border: medium solid white;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent white transparent transparent;
+  }
+
+  .left::after, .right::after {
+    left: 15px;
+  }
+  
+  .right {
+    left: 0%;
+  }
+}
+
+.img-right1 {
+  position: absolute;
+  left: 660px;
+  top: 10px;
+}
+
+.img-left1 {
+  position: absolute;
+  right: 660px;
+  top: 370px;
+}
+
+.img-right2 {
+  position: absolute;
+  left: 660px;
+  top: 705px;
+}
+
+.img-left2 {
+  position: absolute;
+  right: 660px;
+  top: 1020px;
+}
+
+.img-right3 {
+  position: absolute;
+  left: 660px;
+  top: 1435px;
+}
+
+.img-left4 {
+  position: absolute;
+  right: 725px;
+  top: 2350px;
+}
+
+figcaption {
+  color: white;
+}
+
+.img-lenin {
+  position: absolute;
+  right: 645px;
+  top: 1120px;
+}
+
+.img-fontanka {
+  position: absolute;
+  left: 650px;
+  top: 1900px;
+}
+
+/* 145 */

@@ -40,6 +40,23 @@ class ProfileUpdateForm(forms.ModelForm):
 		# django_project/users/forms.py.
 		fields = ['m_Profile_Image', 'm_Facial_Image']
 
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.fields['m_Profile_Image'].required = False
+		self.fields['m_Facial_Image'].required = False
+
+	def clean(self):
+		cleaned_data = super().clean()
+		image = cleaned_data.get('m_Profile_Image')
+		facial_image = cleaned_data.get('m_Facial_Image')
+
+		if not image and not facial_image:
+			raise forms.ValidationError(
+				"Please upload either a Profile Image or a Facial Image."
+			)
+
+		return cleaned_data
+
 # After adding a form in the "users/forms.py"
 # file, I had to import it in the
 # "users/views.py" file.

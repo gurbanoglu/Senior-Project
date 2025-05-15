@@ -93,9 +93,9 @@ with open('posts.json') as file:
 
   for post in posts_json:
 
-  post = Post(m_title=post['title'], m_content=post['content'], m_author_id=post['user_id'])
+    post = Post(m_title=post['title'], m_content=post['content'], m_author_id=post['user_id'])
 
-  post.save()
+    post.save()
 
 exit()
 ```
