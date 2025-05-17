@@ -5,3 +5,5 @@ __pycache__
 django_project/venv/
 .git/
 django_project/db.sqlite3
+
+.env
